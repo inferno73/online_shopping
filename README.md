@@ -11,5 +11,5 @@ At the end of a purchase, user will be printed a receipt with his/hers purchases
 Only admin can add new things to online shop (login required). There can be only one admin.
 
 All data regarding users credentials (username, password) is saved to a file called credentials.txt.
-All data regarding available items is saved to a file items.txt.
+All data regarding available items is saved to a file according to item type (ex. pants.txt).
 
