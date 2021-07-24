@@ -17,25 +17,12 @@ public abstract class User {
 		this.password = password;
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
-	
-	/*TODO HashMap ILI DATA CLASS
-    //check if valid username
-    public boolean alreadyTakenUsername(String username) {
-        return credentialsMap.containsKey(username);
-    }
-    
-    //check if valid pair
-	public boolean checkCredentials(String username, String password) {
-	        return credentialsMap.containsKey(username) && credentialsMap.get(username).equals(password);
-	}
-
-    */
-	
+		
 	private String username;
 	private String password;
 	private int numberOfBankAccount;
 	private int rate; //number of rating stars: 1 being bad and 5 excellent
-	private HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
+	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	private double shipping; //free for admin and vip
 	
 	
@@ -43,12 +30,22 @@ public abstract class User {
 	abstract void finishShopping(); //as the way of calculating the final price is different for each type of users
 
 	//TODO
-	public void addToCart() {
+	public void addToCart(Item item) {
 		//cijena i zapamtiti toString artikla jer to ispisati na kraju
+		
+		//createAFile(receipt);  //if not created
+		//writeToFile(item.toString());
+		
 	}
+	
+	//TODO ovdje ili u main treba li STATIC
 	//store credentials
-    public void addCredentials(String username, String password) {
+    public static void addCredentials(String username, String password) {
         credentialsMap.put(username, password);
+    }
+    
+    public static HashMap<String, String> getCredentials () {
+    	return credentialsMap;
     }
 	
 	public String getUsername() {
