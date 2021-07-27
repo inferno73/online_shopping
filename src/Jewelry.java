@@ -4,9 +4,9 @@ public class Jewelry extends Item{
 	
 	static ArrayList<Jewelry> list = new ArrayList<>();
 	private double grams;
-	final double goldKoef=58.22;
-	final double silverKoef=0.8;
-	final double stainlessSteelKoef=0.77;
+	final double goldCoeff=58.22;
+	final double silverCoeff=0.8;
+	final double stainlessSteelCoeff=0.77;
 	static int numberOf=0;
 
 	Jewelry(){
@@ -18,17 +18,17 @@ public class Jewelry extends Item{
 		numberOf++;
 	}
 	
-	public double calculatePrice(double grams, double koeficijent) {
+	public double calculatePrice(double grams, double coefficient) {
 		
 		double result=0;
 		if(this.getMaterial()=="gold") {
-			result=grams*this.goldKoef;
+			result=grams*this.goldCoeff;
 		}
 		else if(this.getMaterial()=="silver") {
-			result=grams*this.silverKoef;
+			result=grams*this.silverCoeff;
 		}
 		else if(this.getMaterial()=="stainless steel") {
-			result=grams*this.stainlessSteelKoef;
+			result=grams*this.stainlessSteelCoeff;
 		}
 		
 		return result;
@@ -41,8 +41,8 @@ public class Jewelry extends Item{
 	}
 	@Override
 	public String toString() {
-		return "Jewelry [grams=" + grams + ", goldKoef=" + goldKoef + ", silverKoef=" + silverKoef
-				+ ", stainlessSteelKoef=" + stainlessSteelKoef + "]";
+		return "Jewelry [grams=" + grams + ", goldKoef=" + goldCoeff + ", silverKoef=" + silverCoeff
+				+ ", stainlessSteelKoef=" + stainlessSteelCoeff + "]";
 	}
 	
 	

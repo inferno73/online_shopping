@@ -9,7 +9,7 @@ public class Validation {
     // check username
     public static boolean alreadyTakenUsername(String username) {
     	if(usernamePassword.containsKey(username)) {
-    		System.out.println("Already taken username");
+    		System.out.println("Already taken username.");
     		return true;
     	}
     	return false;
@@ -19,7 +19,7 @@ public class Validation {
     // check username and password
     public static boolean notValidLogin(String username, String password) {
     	if(usernamePassword.containsKey(username) && usernamePassword.get(username).equals(password)) {
-    		System.out.println("Not valid login");
+    		System.out.println("Not valid login.");
     		return true;
     	}
     	return false;
@@ -35,7 +35,7 @@ public class Validation {
     	if(numberOfBankAccount.getAmount() >= totalPrice) 
     		return true;
     	else {
-    		System.out.println("You do not have enough money on your bank account");
+    		System.out.println("You do not have enough money on your bank account.");
     		return false;
     	}
     }

@@ -5,11 +5,6 @@ public class Main {
 	static Scanner inputFile;
 	
 	public static void main(String[] args) {
-		/*public static calculateRating() {
-		//ocijeniti usluge, pa racunati srednju vrijednost ocjena i printati je na pocetku uz ime Radnje
-		 * kroz hashmap proci i uzeti sve rating i izracunati
-	} */
-		
 		
 		// Welcome
 		System.out.println("Welcome to our online shop! ");
@@ -122,8 +117,9 @@ public class Main {
 	        System.out.println("Choose an option: ");
 	        System.out.println("1. Add New Item");
 	        System.out.println("2. Remove a User");
-	        System.out.println("3. Buy");
-	        System.out.println("4. Exit");
+	        System.out.println("3. Change password");
+	        System.out.println("4. Buy");
+	        System.out.println("5. Exit");
 
 	        try {
 	            int opcija = input.nextInt();
@@ -140,10 +136,12 @@ public class Main {
 	                //
 	                break;
 	            case 4:
-	                brr=1;
 	                //
 	                break;
-
+	            case 5:
+	            	brr=1;
+	            	//
+	            	break;
 	            }
 
 	            if(brr==1) {

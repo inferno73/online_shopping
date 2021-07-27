@@ -4,20 +4,52 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-
-public class ShopMethods implements ShopInterface {
+//singleton class
+class Singleton
+{
+    // static variable single_instance of type Singleton
+   
+  
+    // variable of type String
+    public String s;
+  
+    // private constructor restricted to this class itself
+    
+}
+public class ShopMethods implements ShopInterface { 
+	private static ShopMethods single_instance = null;
 	static Scanner inputFile;
 
+	private ShopMethods()
+    {
+  
+    }
+  
+    // static method to create instance of Singleton class
+    public static ShopMethods getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new ShopMethods();
+  
+        return single_instance;
+    }
+	//updated: parametar fileName added
 	@Override
-	public void createFile() throws IOException {
-		Path path = Paths.get("item.txt");
-		
-		if(!Files.exists(path)) {
-			Files.createFile(path);
+	public void createFile(String fileName) {
+		try {
+			Path path = Paths.get(fileName);
+			
+			if(!Files.exists(path)) {
+				Files.createFile(path);
+			}
+		}catch (IOException exception){
+			System.out.println("IOException occurred. StackTrace: ");
+			exception.printStackTrace();
 		}
-		
+	
 	}
 
+	//TODO napraviti da radi za svaki file, parameters: ime file-a i mozda br, da znamo kad treba u novi red
 	@Override
 	public void printFromFile() {
 		try {
@@ -44,7 +76,7 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToList() {
+	public void saveFileToList() {
 		try {
 			inputFile = new Scanner (Paths.get("item.txt"));	// promijeniti file
 		//pohrani podatke u listu
@@ -64,7 +96,7 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFile() {
+	public void saveListToFile() {
 		try {
 			Path path = Paths.get("item.txt");	// promijeniti file
 			BufferedWriter writer = Files.newBufferedWriter(path);
@@ -78,11 +110,49 @@ public class ShopMethods implements ShopInterface {
 			writer.close();
 			
 		} catch(IOException e) {
-			System.out.println("Problemi sa inputom/outputom.");
-			e.getMessage();
+			System.out.println("IOException occurred. StackTrace: ");
+			e.printStackTrace();
 		}
 		
-	} 
+	}
+
+
+	@Override
+	public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
+		createFile("receipt.txt");
+		Path path = Paths.get("receipt.txt");
+		try {
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			writer.write(itemDetails);
+			writer.write("\n");
+		} catch (IOException e) {
+			System.out.println("IOException occurred. StackTrace: ");
+			e.printStackTrace();
+		}
+		
+	}
 	
-	
+	@Override
+	public double calculateTotal(double itemPrice, double previousTotal) {
+		double total = previousTotal + itemPrice;
+		return total;
+	}
+
+	@Override
+	public void giveAReceipt(double total) {
+		//sysout all from receipt file -TODO dodati parametre u printFromFile()
+		printFromFile();
+		System.out.println("----------------------------------");
+		//delivery address, shipping
+		//total
+		System.out.println("TOTAL: --------------- " + " $"+ total );
+		
+	}
+
+	@Override
+	public void determineShippingInfo() {
+		//trazi adresu
+		//trazi drzavz na osnovu nje odredi shipping
+		
+	} 	
 }

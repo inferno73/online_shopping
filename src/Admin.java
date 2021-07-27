@@ -1,10 +1,11 @@
 //singleton class
 public class Admin extends User {
 	
+	private static final double SHIPPING_DISCOUNT = 0.4;
 	private static Admin single_instance = null;
 	
 	private Admin(){
-		
+		setHasShipping(false);
 	}
 	
 	public static Admin getInstance() {
@@ -15,22 +16,27 @@ public class Admin extends User {
 		return single_instance;
 	}
 	
-	//TODO when inserted the hardcoded pass, able to change it
-	public void changePassword() {}
+	public void changePassword(String newPassword) {
+		single_instance.setPassword(newPassword);
+	}
 	
+	//TODO
 	public void addItemToList(Item item) {
 		//nabavka - dodati "nove objekte ili items"
 		
 	}
+	//pa save u listu
 	
 	public void removeAUser(String username) {
 		User.getCredentials().remove(username);
 	}
 
-	//TODO treba li ova metoda?!
+	//TODO
 	@Override
-	void finishShopping() {
-		// TODO Auto-generated method stub
+	void finishShopping(double total) {
+		ShopMethods shopMethods = ShopMethods.getInstance();
+		total = total * SHIPPING_DISCOUNT;
+		shopMethods.giveAReceipt(total);
 		
 	}
 

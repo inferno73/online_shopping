@@ -1,12 +1,20 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class User {
-/*
-    methods: buyItem();  ()*/
+	
+	private static ArrayList<User> list = new ArrayList<User>();
+	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
+	
+
 	User() {
 		
 	}
 	
+	User(boolean hasShipping) {
+		this.hasShipping = hasShipping;
+	}
+
 	User(String username, String password) {
 		this.username = username;
 		this.password = password;
@@ -17,28 +25,26 @@ public abstract class User {
 		this.password = password;
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
-		
+	
 	private String username;
 	private String password;
 	private int numberOfBankAccount;
 	private int rate; //number of rating stars: 1 being bad and 5 excellent
-	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
-	private double shipping; //free for admin and vip
+	private boolean hasShipping; //free for admin and vip
+	private int numberOfPurchases;
 	
-	
-	//TODO abstract?
-	abstract void finishShopping(); //as the way of calculating the final price is different for each type of users
 
-	//TODO
+	abstract void finishShopping(double total); //as the way of calculating the final price is different for each type of users
+
 	public void addToCart(Item item) {
 		//cijena i zapamtiti toString artikla jer to ispisati na kraju
-		
-		//createAFile(receipt);  //if not created
-		//writeToFile(item.toString());
+		ShopMethods shopMethods = ShopMethods.getInstance();
+		shopMethods.createFile("receipt.txt");  //if not created
+		shopMethods.writeToReceipt(item.toString()); //TOCHECK treba da se pozove metoda definisanog objekta npr pants a ne metoda items
+		//TODO remove added item from the list of available items: metoda da se pozove nakon ove u mainu i rijesi se ovaj problem
 		
 	}
 	
-	//TODO ovdje ili u main treba li STATIC
 	//store credentials
     public static void addCredentials(String username, String password) {
         credentialsMap.put(username, password);
@@ -80,12 +86,28 @@ public abstract class User {
 		this.rate = rate;
 	}
 
-	public double getShipping() {
-		return shipping;
+	public static ArrayList<User> getList() {
+		return list;
 	}
 
-	public void setShipping(double shipping) {
-		this.shipping = shipping;
+	public static void setList(ArrayList<User> list) {
+		User.list = list;
+	}
+
+	public boolean getHasShipping() {
+		return hasShipping;
+	}
+
+	public void setHasShipping(boolean hasShipping) {
+		this.hasShipping = hasShipping;
+	}
+
+	public int getNumberOfPurchases() {
+		return numberOfPurchases;
+	}
+
+	public void setNumberOfPurchases(int numberOfPurchases) {
+		this.numberOfPurchases = numberOfPurchases;
 	}		
 	
 	
