@@ -295,4 +295,28 @@ public class Main {
 
     }
 	
+	public static void menuSignUp() {
+		System.out.println("Please input these information about yourself: ");
+		
+		try {
+		System.out.println("Username: ");
+		String username = input.next();
+		
+		System.out.println("Password: ");
+		String password = input.next();
+		
+		System.out.println("Bank account number: ");
+		int accountNumber = input.nextInt();
+		
+		User newUser = new User(username, password, accountNumber);
+		User.list.add(newuser);
+		
+		 }
+		catch(InputMismatchException e) {
+            input.nextLine();
+            System.out.println("Invalid input. Try again.");
+            System.out.println();
+            menuWelcome();
+        }
+	}
 }
