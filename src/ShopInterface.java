@@ -4,7 +4,29 @@ public interface ShopInterface {
 	
 	public void createFile(String fileName) throws IOException;
 	
-	public void printFromFile();
+	public void printFromFile(String fileName)throws IOException;
+	 
+	public void saveToListPants();
+	
+	public void saveToFilePants();
+	
+	public void saveToListShirt();
+	
+	public void saveToFileShirt();
+	
+	public void saveToListJewelry();
+	
+	public void saveToFileJewelry();
+	
+	public void saveToListSneakers();
+	
+	public void saveToFileSneakers();
+	
+	public void saveToListFormalShoes();
+	
+	public void saveToFileFormalShoes();
+	
+	
 	
 	public void saveFileToList(); //TODO add parameters lista i ime filea
 	

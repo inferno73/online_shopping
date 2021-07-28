@@ -33,7 +33,9 @@ public class ShopMethods implements ShopInterface {
   
         return single_instance;
     }
-	//updated: parametar fileName added
+	
+    
+    
 	@Override
 	public void createFile(String fileName) {
 		try {
@@ -49,110 +51,306 @@ public class ShopMethods implements ShopInterface {
 	
 	}
 
-	//TODO napraviti da radi za svaki file, parameters: ime file-a i mozda br, da znamo kad treba u novi red
 	@Override
-	public void printFromFile() {
+	public void printFromFile(String fileName) {
 		try {
-			inputFile = new Scanner (Paths.get("item.txt")); 	// promijeniti file
-			//System.out.println("Podaci sa file-a item.txt: ");
+			inputFile = new Scanner (Paths.get(fileName)); 
+			
 			int br = 0;
 			while(inputFile.hasNext()) {
-				//za lijep ispis
 				System.out.print(inputFile.next()+" ");
 				br++;
 				if(br%3==0) {
 					System.out.println();
 					br=0;
 				}
-				
 			}
 			
 			System.out.println();
 			System.out.println();
+			
 		} catch(IOException e) {
-			System.out.println("Problemi sa file-om. Provjerite da li imate item.txt u paketu.");
+			System.out.println("File error.");
 		}
 		
 	}
 
 	@Override
-	public void saveFileToList() {
+	public void saveToListPants() {
 		try {
-			inputFile = new Scanner (Paths.get("item.txt"));	// promijeniti file
-		//pohrani podatke u listu
-			while(inputFile.hasNext()) {
-				//kreiraj objekte s tim podacima i upisuj u array listu		// promijeniti metode
-				Item item = new Item();
-				item.setBrojRacuna(inputFile.nextInt());
-				item.setImeVlasnikaRacuna(inputFile.next());
-				item.setIznosRacuna(Double.parseDouble(inputFile.next()));
-				item.listaRacuna.add(item);
+			inputFile = new Scanner (Paths.get("pants.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				Pants pants = new Pants();
+				// type?
+				pants.setColor(inputFile.next());
+				pants.setHasBelt(inputFile.nextBoolean()); 
+				pants.setLength(inputFile.next());
+				pants.setMaterial(inputFile.next());
+				pants.setSize(inputFile.next());
+				pants.setPrice(inputFile.nextDouble());
+				Pants.list.add(pants);
 			}
-			//inputFile.close();
+			
 		} catch(IOException e) {
-			System.out.println("Problemi sa file-om. Provjerite da li imate item.txt u paketu.");
+			System.out.println("File error.");
 		}
-		
 	}
 
 	@Override
-	public void saveListToFile() {
+	public void saveToFilePants() {
 		try {
-			Path path = Paths.get("item.txt");	// promijeniti file
+			Path path = Paths.get("pants.txt");	
 			BufferedWriter writer = Files.newBufferedWriter(path);
 			
-			for(Item item : Item.listaRacuna) {		// promijeniti metode i listu
-				writer.write(item.getBrojRacuna()+" ");
-				writer.write(item.getImeVlasnikaRacuna()+" ");
-				writer.write(String.valueOf(item.getIznosRacuna()));
+			for(Pants pants : Pants.list) {	
+				// type?
+				writer.write("color: " + pants.getColor() + " ");
+				if(pants.isHasBelt())
+					writer.write("has belt");
+				else
+					writer.write("doesn't have belt");
+				writer.write("length: " + pants.getLength() + " ");
+				writer.write("material: " + pants.getMaterial() + " ");
+				writer.write("size: " + pants.getSize() + " ");
+				writer.write("price: " + pants.getPrice() + " ");
 				writer.write("\n");
 			}
 			writer.close();
 			
 		} catch(IOException e) {
+			System.out.println("Input/output error.");
+			e.getMessage();
+		}
+	}
+
+	@Override
+	public void saveToListShirt() {
+		try {
+			inputFile = new Scanner (Paths.get("shirt.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				Shirt shirt = new Shirt();
+				// type?
+				shirt.setColor(inputFile.next());
+				shirt.setHasButtons(inputFile.nextBoolean()); 
+				shirt.setSleeveLength(inputFile.next());
+				shirt.setMaterial(inputFile.next());
+				shirt.setSize(inputFile.next());
+				shirt.setPrice(inputFile.nextDouble());
+				Shirt.list.add(shirt);
+			}
+			
+		} catch(IOException e) {
+			System.out.println("File error.");
+		}
+	}
+
+	@Override
+	public void saveToFileShirt() {
+		try {
+			Path path = Paths.get("shirt.txt");	
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			
+			for(Shirt shirt : Shirt.list) {	
+				// type?
+				writer.write("color: " + shirt.getColor() + " ");
+				if(shirt.isHasButtons())
+					writer.write("has belt");
+				else
+					writer.write("doesn't have belt");
+				writer.write("length: " + shirt.getSleeveLength() + " ");
+				writer.write("material: " + shirt.getMaterial() + " ");
+				writer.write("size: " + shirt.getSize() + " ");
+				writer.write("price: " + shirt.getPrice() + " ");
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
+			System.out.println("Input/output error.");
+			e.getMessage();
+		}		
+	}
+
+	@Override
+	public void saveToListJewelry() {
+		try {
+			inputFile = new Scanner (Paths.get("jewelry.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				Jewelry jewelry = new Jewelry();
+				jewelry.setMaterial(inputFile.next());
+				jewelry.setPrice(inputFile.nextDouble());
+				Jewelry.list.add(jewelry);
+			}
+			
+		} catch(IOException e) {
+			System.out.println("File error.");
+		}
+	}
+
+	@Override
+	public void saveToFileJewelry() {
+		try {
+			Path path = Paths.get("jewelry.txt");	
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			
+			for(Jewelry jewelry : Jewelry.list) {	
+				writer.write("material: " + jewelry.getMaterial() + " ");
+				writer.write("price: " + jewelry.getPrice() + " ");
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
+			System.out.println("Input/output error.");
+			e.getMessage();
+		}
+	}
+
+	@Override
+	public void saveToListSneakers() {
+		try {
+			inputFile = new Scanner (Paths.get("sneakers.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				Sneakers sneakers = new Sneakers();
+				sneakers.setBrand(inputFile.next());
+				sneakers.setForSports(inputFile.nextBoolean());
+				sneakers.setMaterial(inputFile.next());
+				sneakers.setPrice(inputFile.nextDouble());
+				Sneakers.list.add(sneakers);
+			}
+			
+		} catch(IOException e) {
+			System.out.println("File error.");
+		}
+	}
+
+	@Override
+	public void saveToFileSneakers() {
+		try {
+			Path path = Paths.get("sneakers.txt");	
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			
+			for(Sneakers sneakers : Sneakers.list) {	
+				writer.write("brand: " + sneakers.getBrand() + " ");
+				if(sneakers.isForSports())
+					writer.write("is for sports");
+				else
+					writer.write("isn't for sports");
+				writer.write("material: " + sneakers.getMaterial() + " ");
+				//writer.write("size: " + sneakers.getSize() + " ");
+				writer.write("price: " + sneakers.getPrice() + " ");
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
+
+			System.out.println("Input/output error.");
+			e.getMessage();
+
 			System.out.println("IOException occurred. StackTrace: ");
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void saveToListFormalShoes() {
+		try {
+			inputFile = new Scanner (Paths.get("formalshoes.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				FormalShoes formalshoes = new FormalShoes();
+				// type?
+				formalshoes.setMaterial(inputFile.next());
+				formalshoes.setPrice(inputFile.nextDouble());
+				FormalShoes.list.add(formalshoes);
+			}
+			
+		} catch(IOException e) {
+			System.out.println("File error.");
+		}
+	}
+
+	@Override
+	public void saveToFileFormalShoes() {
+		try {
+			Path path = Paths.get("jewelry.txt");	
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			
+			for(FormalShoes formalshoes : FormalShoes.list) {	
+				writer.write("material: " + formalshoes.getMaterial() + " ");
+				writer.write("price: " + formalshoes.getPrice() + " ");
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
+			System.out.println("Input/output error.");
+			e.getMessage();
+		}
+	}
+	
+	
+	
+	
+
+	@Override
+	public void saveFileToList() {
+		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
-	public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
-		createFile("receipt.txt");
-		Path path = Paths.get("receipt.txt");
-		try {
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			writer.write(itemDetails);
-			writer.write("\n");
-		} catch (IOException e) {
-			System.out.println("IOException occurred. StackTrace: ");
-			e.printStackTrace();
-		}
+	public void saveListToFile() {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	@Override
-	public double calculateTotal(double itemPrice, double previousTotal) {
-		double total = previousTotal + itemPrice;
-		return total;
-	}
+	//TODO napraviti da radi za svaki file, parameters: ime file-a i mozda br, da znamo kad treba u novi red
 
-	@Override
-	public void giveAReceipt(double total) {
-		//sysout all from receipt file -TODO dodati parametre u printFromFile()
-		printFromFile();
-		System.out.println("----------------------------------");
-		//delivery address, shipping
-		//total
-		System.out.println("TOTAL: --------------- " + " $"+ total );
+		@Override
+		public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
+			createFile("receipt.txt");
+			Path path = Paths.get("receipt.txt");
+			try {
+				BufferedWriter writer = Files.newBufferedWriter(path);
+				writer.write(itemDetails);
+				writer.write("\n");
+			} catch (IOException e) {
+				System.out.println("IOException occurred. StackTrace: ");
+				e.printStackTrace();
+			}
+			
+		}
 		
-	}
+		@Override
+		public double calculateTotal(double itemPrice, double previousTotal) {
+			double total = previousTotal + itemPrice;
+			return total;
+		}
 
-	@Override
-	public void determineShippingInfo() {
-		//trazi adresu
-		//trazi drzavz na osnovu nje odredi shipping
-		
-	} 	
+		@Override
+		public void giveAReceipt(double total) {
+			//sysout all from receipt file -TODO dodati parametre u printFromFile()
+			printFromFile("receipt.txt");
+			System.out.println("----------------------------------");
+			//delivery address, shipping
+			//total
+			System.out.println("TOTAL: --------------- " + " $"+ total );
+			
+		}
+
+		@Override
+		public void determineShippingInfo() {
+			//trazi adresu
+			//trazi drzavz na osnovu nje odredi shipping
+			
+		}
+
+
+
 }

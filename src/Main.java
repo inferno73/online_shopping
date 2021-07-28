@@ -1,15 +1,36 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main {
 	static Scanner input = new Scanner (System.in);
 	static Scanner inputFile;
 	
-	public static void main(String[] args) {
+
+	//static ShopMethods method =  new ShopMethods();
+	
+	public static void main(String[] args) throws IOException {
+		
+		//TODO nije vidljivo zbog singleton klase
+		//ShopMethods method =  new ShopMethods();
+		
+		/*
+		// kreiraj fajlove
+		method.createFile("pants.txt");
+		method.createFile("shirt.txt");
+		method.createFile("jewelry.txt");
+		method.createFile("sneakers.txt");
+		method.createFile("formalshoes.txt");
+		*/	
+		
 		
 		// Welcome
 		System.out.println("Welcome to our online shop! ");
 		System.out.println("Our average rating: ");
 		 //TODO rating
+		/*public static calculateRating() {
+		//ocijeniti usluge, pa racunati srednju vrijednost ocjena i printati je na pocetku uz ime Radnje
+		 * kroz hashmap proci i uzeti sve rating i izracunati
+		} */
 		
 		menuWelcome();
 		
@@ -227,18 +248,23 @@ public class Main {
                 switch(opcija) {
                 case 1: 
                     //
+                	//method.printFromFile("pants.txt");
                     break;
                 case 2:
                     //
+                	//method.printFromFile("shirt.txt");
                     break;
                 case 3:
                     //
+                	//method.printFromFile("sneakers.txt");
                     break;
                 case 4:
                     //
+                	//method.printFromFile("formalshoes.txt");
                     break;
                 case 5: 
                     //
+                	//method.printFromFile("jewelry.txt");
                     break;
                 case 6:
                     //
