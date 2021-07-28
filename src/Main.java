@@ -102,10 +102,10 @@ public class Main {
 
                 switch(opcija) {
                 case 1: 
-                    //
+                    menuLogIn();
                     break;
                 case 2:
-                    //
+                	menuSignUp();
                     break;
                 case 3: 
                 	brr=1;
@@ -301,17 +301,46 @@ public class Main {
 		try {
 		System.out.println("Username: ");
 		String username = input.next();
-		
-		System.out.println("Password: ");
+		if(Validation.alreadyTakenUsername(username)) {
+			System.out.println("");
+			menuWelcome();
+		}
+		else {
+			System.out.println("Password: ");
 		String password = input.next();
 		
 		System.out.println("Bank account number: ");
 		int accountNumber = input.nextInt();
 		
 		User newUser = new User(username, password, accountNumber);
-		User.list.add(newuser);
+		User.list.add(newUser);
+		}
+		
 		
 		 }
+		catch(InputMismatchException e) {
+            input.nextLine();
+            System.out.println("Invalid input. Try again.");
+            System.out.println();
+            menuWelcome();
+        }
+	}
+	
+	public static void menuLogIn() {
+		try {
+		System.out.println("Input username:");
+		String username = input.next();
+		
+		System.out.println("Input password: ");
+		String password = input.next();
+		}
+		if(Validation.notValidLogin(username, password)) {
+			System.out.println("");
+			menuWelcome();
+		}
+		else {
+			menuUser();
+		}
 		catch(InputMismatchException e) {
             input.nextLine();
             System.out.println("Invalid input. Try again.");
