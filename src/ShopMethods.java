@@ -350,7 +350,47 @@ public class ShopMethods implements ShopInterface {
 			//trazi drzavz na osnovu nje odredi shipping
 			
 		}
-
-
+		
+		public void menuRating() {
+			
+			//provjeriti da li je vec ocijnio
+			    for(int i=0; i<User.list.size(); i++) {
+			    	if(User.list.get(i).getUsername.equals(username)) {
+			    		if(User.list.get(i).getRate != 0) {
+			    			
+			    			//ako nije, pitati da li zeli da ocijeni
+			    			
+			    			System.out.println("Do you want to rate our store? ");
+			    			System.out.println("1. YES");
+			    			System.out.println("2. NO");
+			    			System.out.println("Choose an option");
+			    			int option = input.nextInt();
+			    			switch(option) {
+			    			//ako zeli, unijeti i spremiti ocjenu
+			    			case 1:
+			    				System.out.println("Rate our store with 1-5 stars");
+			    				User.list.get(i).setRate(input.nextInt());
+			    				break;
+			    			case 2:
+			    				break;
+			    			}
+			    		}
+			    		break;
+			    	}
+			    }	
+		}
+		
+		public double calculateRating() {
+			double result=0, numberOfRatings=0, currentRating=0; 
+			for(int i=0; i<User.list.size(); i++) {
+				if(User.list.get(i).getRate !=0) {
+					currentRating+=User.list.get(i).getRate;
+					numberOfRatings++;
+				}
+			}
+			
+			result=currentRating/numberOfRatings;
+			return result;
+		}
 
 }

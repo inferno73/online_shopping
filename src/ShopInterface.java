@@ -40,4 +40,11 @@ public interface ShopInterface {
 	
 	public void determineShippingInfo();
 	
+	
+	public void menuRating();
+	
+	public double calculateRating();
+	
+	
+	
 }
