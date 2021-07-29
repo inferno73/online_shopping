@@ -3,7 +3,8 @@ import java.util.HashMap;
 
 public abstract class User {
 	
-	private static ArrayList<User> list = new ArrayList<User>();
+	//TODO treba li?
+	//private static ArrayList<User> list = new ArrayList<User>();
 	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	
 
@@ -86,14 +87,14 @@ public abstract class User {
 		this.rate = rate;
 	}
 
-	public static ArrayList<User> getList() {
+	/*public static ArrayList<User> getList() {
 		return list;
 	}
 
 	public static void setList(ArrayList<User> list) {
 		User.list = list;
 	}
-
+*/
 	public boolean getHasShipping() {
 		return hasShipping;
 	}

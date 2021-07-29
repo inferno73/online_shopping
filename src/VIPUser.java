@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 
 public class VIPUser extends User {
 	
+	private static ArrayList<VIPUser> list = new ArrayList<VIPUser>();
 	private static final double SHIPPING_DISCOUNT = 0.3;
 	
 	VIPUser() {

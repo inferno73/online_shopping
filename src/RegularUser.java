@@ -1,7 +1,8 @@
 
 public class RegularUser extends User {
 
-	RegularUser(){ 
+	RegularUser(String username, String password, int numberOfBankAccount){ 
+		super(username, password, numberOfBankAccount);
 		setHasShipping(true);
 		//if from desired country shipping $5 otherwise $20
 		}

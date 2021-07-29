@@ -1,7 +1,9 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 public interface ShopInterface {
 	
+	//FILES-LISTS
 	public void createFile(String fileName) throws IOException;
 	
 	public void printFromFile(String fileName)throws IOException;
@@ -28,9 +30,18 @@ public interface ShopInterface {
 	
 	
 	
-	public void saveFileToList(); //TODO add parameters lista i ime filea
+	public void saveFileToList(String fileName, ArrayList<Object> list); //TODO add parameters lista i ime filea
 	
-	public void saveListToFile();  //TODO add parameters lista i ime filea
+	public void saveListToFile(String fileName, ArrayList<Object> list);  //TODO add parameters lista i ime filea
+	
+	//MENUS
+	public void menuWelcome();
+	public void menuRating();
+	public void menuAdmin();
+	public void menuUser();
+	public void menuShop();
+	public void menuSignUp();
+	public void menuLogIn();
 	
 	public void writeToReceipt(String itemDetails);  //writes down item specs when it is added to cart
 	
@@ -39,9 +50,6 @@ public interface ShopInterface {
 	public double calculateTotal(double itemPrice, double previousTotal); //returns total price: adds new expense to previous expense
 	
 	public void determineShippingInfo();
-	
-	
-	public void menuRating();
 	
 	public double calculateRating();
 	
