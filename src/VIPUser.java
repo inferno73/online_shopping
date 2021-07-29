@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class VIPUser extends User {
 	
 	private static ArrayList<VIPUser> list = new ArrayList<VIPUser>();
+	
 	private static final double SHIPPING_DISCOUNT = 0.3;
 	
 	VIPUser() {
@@ -17,6 +18,14 @@ public class VIPUser extends User {
 			shopMethods.giveAReceipt(total);
 			//skini sa racuna total, provjeri prvo validacija ima li dovoljno pa onda skini
 			//Validation.enoughMoney(accountNumber, total);
+		}
+		
+		public static ArrayList<VIPUser> getList() {
+			return list;
+		}
+
+		public static void setList(ArrayList<VIPUser> list) {
+			VIPUser.list = list;
 		}
 
 }

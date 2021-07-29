@@ -36,7 +36,7 @@ public interface ShopInterface {
 	
 	//MENUS
 	public void menuWelcome();
-	public void menuRating();
+	public void menuRating(String password);
 	public void menuAdmin();
 	public void menuUser();
 	public void menuShop();

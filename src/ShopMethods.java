@@ -612,47 +612,75 @@ public class ShopMethods implements ShopInterface {
 	        }
 		}
 		
+		//TODO rijesiti ponavljanje istog koda za dva razlicita objekta
 		@Override
-		public void menuRating() {
-			//TODO uvrstiti liste iz regularUser i VIPuser
-			//provjeriti da li je vec ocijnio
-			    for(int i=0; i<User.list.size(); i++) {
-			    	if(User.list.get(i).getUsername.equals(username)) {
-			    		if(User.list.get(i).getRate != 0) {
-			    			
-			    			//ako nije, pitati da li zeli da ocijeni
-			    			
-			    			System.out.println("Do you want to rate our store? ");
-			    			System.out.println("1. YES");
-			    			System.out.println("2. NO");
-			    			System.out.println("Choose an option");
-			    			int option = input.nextInt();
-			    			switch(option) {
-			    			//ako zeli, unijeti i spremiti ocjenu
-			    			case 1:
-			    				System.out.println("Rate our store with 1-5 stars");
-			    				User.list.get(i).setRate(input.nextInt());
-			    				break;
-			    			case 2:
-			    				break;
-			    			}
-			    		}
-			    		break;
-			    	}
-			    }	
+		public void menuRating(String password) {
+			//TODO uvrstiti liste iz regularUser i VIPuser odrediti koji je user tako sto ce ici kroz listu i traziti poklapanje sa passwordom
+			//provjeriti da li je vec ocijenio
+			for(RegularUser user : RegularUser.getList()) {
+				if(user.getRate() !=0) {
+					System.out.println("Do you want to rate our store? ");
+	    			System.out.println("1. YES");
+	    			System.out.println("2. NO");
+	    			System.out.println("Choose an option");
+	    			int option = input.nextInt();
+	    			
+	    			switch(option) {
+	    			//ako zeli, unijeti i spremiti ocjenu
+	    			case 1:
+	    				System.out.println("Rate our store with 1-5 stars");
+	    				user.setRate(input.nextInt());
+	    				break;
+	    			case 2:
+	    				break;
+	    			}
+				}
+				break;
+			}
+			
+			for(VIPUser user : VIPUser.getList()) {
+				if(user.getRate() !=0) {
+					System.out.println("Do you want to rate our store? ");
+	    			System.out.println("1. YES");
+	    			System.out.println("2. NO");
+	    			System.out.println("Choose an option");
+	    			int option = input.nextInt();
+	    			
+	    			switch(option) {
+	    			//ako zeli, unijeti i spremiti ocjenu
+	    			case 1:
+	    				System.out.println("Rate our store with 1-5 stars");
+	    				user.setRate(input.nextInt());
+	    				break;
+	    			case 2:
+	    				break;
+	    			}
+				}
+				break;
+			}
+			   
 		}
 		
-		//TODO koristiti liste vipUser i regularUser
+		
 		public double calculateRating() {
-			double result=0, numberOfRatings=0, currentRating=0; 
-			for(int i=0; i<VIPUser.list.size(); i++) {
-				if(VIPUser.list.get(i).getRate !=0) {
-					currentRating+=VIPUser.list.get(i).getRate;
+			double result=0, numberOfRatings=0, currentRating=0;
+			
+			for(int i=0; i<VIPUser.getList().size(); i++) {
+				if(VIPUser.getList().get(i).getRate() !=0) {
+					currentRating+=VIPUser.getList().get(i).getRate();
+					numberOfRatings++;
+				}
+			}
+			
+			for(int i=0; i<RegularUser.getList().size(); i++) {
+				if(RegularUser.getList().get(i).getRate() !=0) {
+					currentRating+=RegularUser.getList().get(i).getRate();
 					numberOfRatings++;
 				}
 			}
 			
 			result=currentRating/numberOfRatings;
+			
 			return result;
 		}
 
