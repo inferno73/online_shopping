@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class RegularUser extends User {
 
@@ -8,15 +8,16 @@ public class RegularUser extends User {
 		//if from desired country shipping $5 otherwise $20
 		}
 	
-	private static ArrayList<RegularUser> list = new ArrayList<RegularUser>();
 	
-		public static ArrayList<RegularUser> getList() {
-		return list;
-	}
+	//private static ArrayList<RegularUser> list = new ArrayList<RegularUser>();
+	
+	//	public static ArrayList<RegularUser> getList() {
+	//	return list;
+	//}
 
-	public static void setList(ArrayList<RegularUser> list) {
-		RegularUser.list = list;
-	}
+	//public static void setList(ArrayList<RegularUser> list) {
+	//	RegularUser.list = list;
+	//}
 
 		@Override
 		void finishShopping(double total) {

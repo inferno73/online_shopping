@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 public abstract class User {
 	
-	//TODO treba li?
-	//private static ArrayList<User> list = new ArrayList<User>();
+	//Mozemo staviti ovu listu gdje ce biti svi useri, i jos VIPlistu gdje cemo s ove liste dodati vip usere?
+	private static ArrayList<User> list = new ArrayList<User>();
 	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	
 
@@ -109,6 +109,14 @@ public abstract class User {
 
 	public void setNumberOfPurchases(int numberOfPurchases) {
 		this.numberOfPurchases = numberOfPurchases;
+	}
+
+	public static ArrayList<User> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<User> list) {
+		User.list = list;
 	}		
 	
 	

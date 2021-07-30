@@ -448,7 +448,6 @@ public class ShopMethods implements ShopInterface {
 			RegularUser.getList().add(newUser);
 			}
 			
-			
 			 }
 			catch(InputMismatchException e) {
 	            input.nextLine();
@@ -471,7 +470,7 @@ public class ShopMethods implements ShopInterface {
 		        System.out.println("5. Exit");
 
 		        try {
-		            int  = input.nextInt();
+		            int option = input.nextInt();
 		            int brr=0; 
 
 		            switch(option) {
@@ -526,7 +525,7 @@ public class ShopMethods implements ShopInterface {
 
 	                switch(option) {
 	                case 1: 
-	                    //
+	                    menuShop();
 	                    break;
 	                case 2:
 	                    //
@@ -565,7 +564,7 @@ public class ShopMethods implements ShopInterface {
 	            System.out.println("4. FormalShoes");
 	            System.out.println("5. Jewelry");
 	            System.out.println("6. End Shopping");
-	            System.out.println("7. Back"); //menuUser
+	            System.out.println("7. Back");
 	            System.out.println("8. Exit"); // break;
 
 
@@ -598,7 +597,7 @@ public class ShopMethods implements ShopInterface {
 	                    //
 	                    break;
 	                case 7:
-	                    //
+	                    //menuUser();
 	                    break;
 	                case 8:
 	                    brr=1;
@@ -625,53 +624,115 @@ public class ShopMethods implements ShopInterface {
 		
 		
 		
-		//TODO rijesiti ponavljanje istog koda za dva razlicita objekta
+		//TODO spremiti ocjenu
 		@Override
 		public void menuRating(String password) {
-
-			for(RegularUser user : RegularUser.getList()) {
-				if(user.getRate() !=0) {
-					System.out.println("Do you want to rate our store? ");
-	    			System.out.println("1. YES");
-	    			System.out.println("2. NO");
-	    			System.out.println("Choose an option");
-	    			int option = input.nextInt();
-	    			
-	    			switch(option) {
-	    			//ako zeli, unijeti i spremiti ocjenu
-	    			case 1:
-	    				System.out.println("Rate our store with 1-5 stars");
-	    				user.setRate(input.nextInt());
-	    				break;
-	    			case 2:
-	    				break;
-	    			}
+			for(User user : User.getList()) {
+				  if(user.getRate() !=0) {
+						System.out.println("Do you want to rate our store? ");
+		    			System.out.println("1. YES");
+		    			System.out.println("2. NO");
+		    			System.out.println();
+		    			System.out.println("Choose an option");
+		    			int option = input.nextInt();
+		    			
+		    			switch(option) {
+		    			//ako zeli, unijeti i spremiti ocjenu
+		    			case 1:
+		    				System.out.println("Rate our store with 1-5 stars");
+		    				user.setRate(input.nextInt());
+		    				break;
+		    			case 2:
+		    				break;
+		    			}
+					}
+					break;
 				}
-				break;
-			}
-			
-			for(VIPUser user : VIPUser.getList()) {
-				if(user.getRate() !=0) {
-					System.out.println("Do you want to rate our store? ");
-	    			System.out.println("1. YES");
-	    			System.out.println("2. NO");
-	    			System.out.println("Choose an option");
-	    			int option = input.nextInt();
-	    			
-	    			switch(option) {
-	    			//ako zeli, unijeti i spremiti ocjenu
-	    			case 1:
-	    				System.out.println("Rate our store with 1-5 stars");
-	    				user.setRate(input.nextInt());
-	    				break;
-	    			case 2:
-	    				break;
-	    			}
-				}
-				break;
-			}
-			   
 		}
+		
+		public void menuEndShopping ()
+		{
+			 while(true) {
+
+				 	System.out.println("End shopping?");
+				 	System.out.println();
+		            System.out.println("Choose an option: ");
+		            System.out.println("1. Yas");
+		            System.out.println("2. No");
+		            
+		            try {
+		                int option = input.nextInt();
+		                int brr=0; 
+
+		                switch(option) {
+		                case 1: 
+		                	determineShippingInfo();
+		                	// TODO cost
+							// make a purchase
+		                    break;
+		               
+		                case 2:
+		                    brr=1;
+		                    menuShop();
+		                    break;
+		                }
+
+		                if(brr==1) {
+		                    //pohraniUFile();
+		                    break;
+		                }
+
+		            } catch(InputMismatchException e) {
+		                input.nextLine();
+		                System.out.println("Invalid input. Try again.");
+		                System.out.println();
+		                menuWelcome();
+		            }
+
+		        }
+		}
+		
+		public void menuMakeAPurchase ()
+		{
+			while(true) {
+
+			 	System.out.println("Do you want to make purchase?");
+			 	System.out.println();
+	            System.out.println("Choose an option: ");
+	            System.out.println("1. Yas");
+	            System.out.println("2. No");
+	            
+	            try {
+	                int option = input.nextInt();
+	                int brr=0; 
+
+	                switch(option) {
+	                case 1: 
+						// TODO giveAReceipt (total);
+						//System.out.println("Thank You!");
+						//countPurchases(username);
+	                    break;
+	               
+	                case 2:
+	                    brr=1;
+	                    menuShop();
+	                    break;
+	                }
+
+	                if(brr==1) {
+	                    //pohraniUFile();
+	                    break;
+	                }
+
+	            } catch(InputMismatchException e) {
+	                input.nextLine();
+	                System.out.println("Invalid input. Try again.");
+	                System.out.println();
+	                menuWelcome();
+	            }
+	        }
+		}
+		
 		
 		@Override
 		public double calculateTotal(double itemPrice, double previousTotal) {
@@ -719,6 +780,44 @@ public class ShopMethods implements ShopInterface {
 			
 			return result;
 		}
+		
+		public void becomeVIPUser (String username)
+		{
+			VIPUser newVIPUser = new VIPUser ();
+			
+			for (int i = 0; i < User.getList().size(); i++)
+			{
+				if(User.getList().get(i).getUsername() == username)
+				{
+					if(User.getList().get(i).getNumberOfPurchases() >= 4)
+					{
+						newVIPUser.setUsername(User.getList().get(i).getUsername());
+						newVIPUser.setPassword(User.getList().get(i).getPassword());
+						newVIPUser.setNumberOfBankAccount(User.getList().get(i).getNumberOfBankAccount());
+						newVIPUser.setHasShipping(User.getList().get(i).getHasShipping());
+						newVIPUser.setRate(User.getList().get(i).getRate());
+						
+						VIPUser.getVIPlist().add(newVIPUser);
+					}
+				}
+
+			}
+		}
+		
+		public void countPurchases (String username)
+		{
+			VIPUser newVIPUser = new VIPUser ();
+			
+			for (int i = 0; i < User.getList().size(); i++)
+			{
+				if(User.getList().get(i).getUsername() == username)
+				{
+					User.getList().get(i).setNumberOfPurchases(User.getList().get(i).getNumberOfPurchases() + 1);
+				}
+
+			}
+		}
+			
 
 		public void saveAllToFile() {
 			

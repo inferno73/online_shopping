@@ -23,18 +23,13 @@ public class Main {
 		System.out.println("Welcome to our online shop! ");
 		System.out.print("Our average rating: " + method.calculateRating());
 		
-		// SignUp or Login 
+		// SignUp or LogIn 
 		method.menuWelcome();
-		
-			//if Admin meni 
-				
-			
+		//SignUp
+		//LogIn
+			//Admin meni 
 			//user meni
-				
-		
-				// "go to shop" meni
-					
-		
+				// shop meni
 						// Pants (file)
 							// add cost
 		
