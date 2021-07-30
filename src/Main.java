@@ -5,38 +5,27 @@ public class Main {
 	static Scanner input = new Scanner (System.in);
 	static Scanner inputFile;
 	
-
-	//static ShopMethods method =  new ShopMethods();
-	
 	public static void main(String[] args) throws IOException {
 		
-		//TODO nije vidljivo zbog singleton klase
-		//ShopMethods method =  new ShopMethods();
+		ShopMethods method = ShopMethods.getInstance();
 		
-		/*
-		// kreiraj fajlove
 		method.createFile("pants.txt");
 		method.createFile("shirt.txt");
 		method.createFile("jewelry.txt");
 		method.createFile("sneakers.txt");
-		method.createFile("formalshoes.txt");
-		*/	
+		method.createFile("formal_shoes.txt");
+		method.createFile("regular_user.txt");
+		method.createFile("vip_user.txt");
+		method.createFile("admin.txt");
+	
+		//TODO populate lists from file data
 		
-		
-		// Welcome
 		System.out.println("Welcome to our online shop! ");
-		System.out.println("Our average rating: ");
-		 //TODO rating
-		/*public static calculateRating() {
-		//ocijeniti usluge, pa racunati srednju vrijednost ocjena i printati je na pocetku uz ime Radnje
-		 * kroz hashmap proci i uzeti sve rating i izracunati
-		} */
+		System.out.print("Our average rating: " + method.calculateRating());
 		
+		// SignUp or Login 
+		method.menuWelcome();
 		
-				
-		//item files
-		// SignUp
-		//Login 
 			//if Admin meni 
 				
 			

@@ -290,20 +290,20 @@ public class ShopMethods implements ShopInterface {
 	
 	
 	
-
+//TODO overloading za ove
 	@Override
-	public void saveFileToList(String fileName, ArrayList<Object> list) {
+	public void saveFileToList(String fileName, ArrayList<Pants> Pants.getList()) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void saveListToFile(String fileName, ArrayList<Object> list) {
+	public void saveListToFile(String fileName, ArrayList<Pants> Pants.getList()) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	//TODO napraviti da radi za svaki file, parameters: ime file-a i mozda br, da znamo kad treba u novi red
+	
 
 		@Override
 		public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
@@ -320,30 +320,6 @@ public class ShopMethods implements ShopInterface {
 			
 		}
 		
-		@Override
-		public double calculateTotal(double itemPrice, double previousTotal) {
-			double total = previousTotal + itemPrice;
-			return total;
-		}
-
-		@Override
-		public void giveAReceipt(double total) {
-			//sysout all from receipt file -TODO dodati parametre u printFromFile()
-			printFromFile("receipt.txt");
-			System.out.println("----------------------------------");
-			//delivery address, shipping
-			//total
-			System.out.println("TOTAL: --------------- " + " $"+ total );
-			
-		}
-
-		@Override
-		public void determineShippingInfo() {
-			//trazi adresu
-			//trazi drzavz na osnovu nje odredi shipping
-			
-		}
-		
 //MENUS
 		@Override
 		public void menuWelcome(){
@@ -357,10 +333,10 @@ public class ShopMethods implements ShopInterface {
 			
 
 	            try {
-	                int opcija = input.nextInt();
+	                int option = input.nextInt();
 	                int brr=0; 
 
-	                switch(opcija) {
+	                switch(option) {
 	                case 1: 
 	                    menuLogIn();
 	                    break;
@@ -374,7 +350,7 @@ public class ShopMethods implements ShopInterface {
 	                }
 	                
 	                if(brr==1) {
-	                    //pohraniUFile();
+	                    //TODO snimi u file ako ima sta
 	                    break;
 	                }
 	                
@@ -390,6 +366,98 @@ public class ShopMethods implements ShopInterface {
 
 	    }
 		
+
+		@Override
+		public void menuLogIn() {
+			try {
+				while(true) {
+					System.out.println("Input username:");
+					String username = input.next();
+					
+					System.out.println("Input password: ");
+					String password = input.next();
+					
+					if(Validation.notValidLogin(username, password)) {
+						System.out.println("Invalid login, username and password don't match. Try again.");
+						System.out.println();
+						
+					}
+					else {
+						//check if admin --then goto adminMenu
+						if(Admin.getInstance().getPassword().equals(password)) {
+							menuAdmin();
+						} else {
+							menuUser();
+						}
+						
+					}
+				}
+				
+			} catch(InputMismatchException e) {
+	            input.nextLine();
+	            System.out.println("Invalid input. Try again.");
+	            System.out.println();
+	            menuWelcome();
+	        }
+		}
+		
+		@Override
+		public void menuSignUp() {
+			System.out.println("Please type in these information about yourself: ");
+			//TODO VISKA zagrada dodaj while
+			try {
+				String username, password;
+				int accountNumber;
+				while(true) {
+					System.out.println("Username: ");
+					 username = input.next();
+					if(Validation.alreadyTakenUsername(username)) {
+						System.out.println("This username is already taken, please enter a different one.");
+						System.out.println();
+						continue;
+					} else {
+						break;
+					}
+				}
+				while(true) {
+						System.out.println("Password: ");
+						 password = input.next();
+						if (Validation.alreadyTakenPassword(password)) { 
+							System.out.println("This password is already taken, please enter a different one.");
+							System.out.println();
+							continue;
+						} else {
+							break;
+						}
+				}
+				while(true) {
+					System.out.println("Bank account number: ");
+					 accountNumber = input.nextInt();
+				//TODO metoda ispod
+					if (Validation.alreadyTakenBankAccount(accountNumber)) { 
+						System.out.println("This bank account is already taken, please enter a different one.");
+						System.out.println();
+						continue;
+					} else {
+						break;
+					}
+			}	
+					
+			//as this user is just creating his/her account ---regularUser
+			RegularUser newUser = new RegularUser(username, password, accountNumber);
+			RegularUser.getList().add(newUser);
+			}
+			
+			
+			 }
+			catch(InputMismatchException e) {
+	            input.nextLine();
+	            System.out.println("Invalid input. Try again.");
+	            System.out.println();
+	            menuWelcome();
+	        }
+		}
+		
 		@Override
 		public void menuAdmin(){
 
@@ -398,15 +466,15 @@ public class ShopMethods implements ShopInterface {
 		        System.out.println("Choose an option: ");
 		        System.out.println("1. Add New Item");
 		        System.out.println("2. Remove a User");
-		        System.out.println("3. Change password");
+		        System.out.println("3. Change your password");
 		        System.out.println("4. Buy");
 		        System.out.println("5. Exit");
 
 		        try {
-		            int opcija = input.nextInt();
+		            int  = input.nextInt();
 		            int brr=0; 
 
-		            switch(opcija) {
+		            switch(option) {
 		            case 1: 
 		                //
 		                break;
@@ -453,10 +521,10 @@ public class ShopMethods implements ShopInterface {
 				System.out.println("3. Log Out");		
 
 	            try {
-	                int opcija = input.nextInt();
+	                int option = input.nextInt();
 	                int brr=0; 
 
-	                switch(opcija) {
+	                switch(option) {
 	                case 1: 
 	                    //
 	                    break;
@@ -502,10 +570,10 @@ public class ShopMethods implements ShopInterface {
 
 
 	            try {
-	                int opcija = input.nextInt();
+	                int option = input.nextInt();
 	                int brr=0; 
 
-	                switch(opcija) {
+	                switch(option) {
 	                case 1: 
 	                    //
 	                	//method.printFromFile("pants.txt");
@@ -555,68 +623,12 @@ public class ShopMethods implements ShopInterface {
 
 	    }
 		
-		@Override
-		public void menuSignUp() {
-			System.out.println("Please input these information about yourself: ");
-			
-			try {
-			System.out.println("Username: ");
-			String username = input.next();
-			if(Validation.alreadyTakenUsername(username)) {
-				System.out.println("");
-				menuWelcome();
-			}
-			else {
-				System.out.println("Password: ");
-			String password = input.next();
-			
-			System.out.println("Bank account number: ");
-			int accountNumber = input.nextInt();
-			
-			//as this user is just creating his/her account ---regularUser
-			RegularUser newUser = new RegularUser(username, password, accountNumber);
-			RegularUser.getList().add(newUser);
-			}
-			
-			
-			 }
-			catch(InputMismatchException e) {
-	            input.nextLine();
-	            System.out.println("Invalid input. Try again.");
-	            System.out.println();
-	            menuWelcome();
-	        }
-		}
 		
-		@Override
-		public void menuLogIn() {
-			try {
-				System.out.println("Input username:");
-				String username = input.next();
-				
-				System.out.println("Input password: ");
-				String password = input.next();
-				
-				if(Validation.notValidLogin(username, password)) {
-					System.out.println("");
-					menuWelcome();
-				}
-				else {
-					menuUser();
-				}
-			} catch(InputMismatchException e) {
-	            input.nextLine();
-	            System.out.println("Invalid input. Try again.");
-	            System.out.println();
-	            menuWelcome();
-	        }
-		}
 		
 		//TODO rijesiti ponavljanje istog koda za dva razlicita objekta
 		@Override
 		public void menuRating(String password) {
-			//TODO uvrstiti liste iz regularUser i VIPuser odrediti koji je user tako sto ce ici kroz listu i traziti poklapanje sa passwordom
-			//provjeriti da li je vec ocijenio
+
 			for(RegularUser user : RegularUser.getList()) {
 				if(user.getRate() !=0) {
 					System.out.println("Do you want to rate our store? ");
@@ -661,7 +673,31 @@ public class ShopMethods implements ShopInterface {
 			   
 		}
 		
+		@Override
+		public double calculateTotal(double itemPrice, double previousTotal) {
+			double total = previousTotal + itemPrice;
+			return total;
+		}
+
+		@Override
+		public void giveAReceipt(double total) {
+			//sysout all from receipt file -TODO dodati parametre u printFromFile()
+			printFromFile("receipt.txt");
+			System.out.println("----------------------------------");
+			//delivery address, shipping
+			//total
+			System.out.println("TOTAL: --------------- " + " $"+ total );
+			
+		}
+
+		@Override
+		public void determineShippingInfo() {
+			//trazi adresu
+			//trazi drzavz na osnovu nje odredi shipping
+			
+		}
 		
+		@Override
 		public double calculateRating() {
 			double result=0, numberOfRatings=0, currentRating=0;
 			
@@ -684,4 +720,28 @@ public class ShopMethods implements ShopInterface {
 			return result;
 		}
 
+		public void saveAllToFile() {
+			
+			saveToFilePants();
+			
+			saveToFileShirt();
+			
+			saveToFileJewelry();
+			
+			saveToFileSneakers();
+			
+			saveToFileFormalShoes();
+		}
+		//TODO dodati za usere metode overloadane
+		
+		public void saveAllToList() {
+			saveToListPants();
+			saveToListShirt();
+			saveToListJewelry();
+			saveToListSneakers();
+			saveToListFormalShoes();
+			saveToListRegularUser();
+			saveToListVIPUser();
+			saveToListAdminUser();
+		}
 }

@@ -6,9 +6,22 @@ public interface ShopInterface {
 	//FILES-LISTS
 	public void createFile(String fileName) throws IOException;
 	
-	public void printFromFile(String fileName)throws IOException;
+	public void printFromFile(String fileName)throws IOException; //writes file data to console so user can choose what to buy
 	 
-	public void saveToListPants();
+	//TODO Kanita - pokusaj da imas samo ove dvije metode ispod, pa da ih OVERLOAD u ShopMethods i dajes joj parametre razlicitog tipa tj listu objekata, ako ne bude
+	//moglo tako, onda ih izbrisi a u shopMethods da imas overloadane samo metode bez overridinga
+	public void saveToList();
+	
+	public void saveToFile();
+	
+	public void saveFileToList(String fileName, ArrayList<?> list); //TODO add parameters lista i ime filea
+	
+	public void saveListToFile(String fileName, ArrayList<?> list);  //TODO add parameters lista i ime filea
+	
+	
+	/* TODO kodove ovih metoda iskoristi kad uradis OVERLOAD ovih iznad u shopMethods
+	 * 
+	 public void saveToListPants();
 	
 	public void saveToFilePants();
 	
@@ -28,20 +41,29 @@ public interface ShopInterface {
 	
 	public void saveToFileFormalShoes();
 	
+	public void saveToListRegularUser();
 	
+	public void saveToFileRegularUser();
 	
-	public void saveFileToList(String fileName, ArrayList<Object> list); //TODO add parameters lista i ime filea
+	public void saveToListVIPUser();
 	
-	public void saveListToFile(String fileName, ArrayList<Object> list);  //TODO add parameters lista i ime filea
+	public void saveToFileVIPUser();
+	
+	public void saveToListAdmin();
+	
+	public void saveToFileAdmin();
+	
+	*/
+	
 	
 	//MENUS
 	public void menuWelcome();
-	public void menuRating(String password);
+	public void menuSignUp();
+	public void menuLogIn();
 	public void menuAdmin();
 	public void menuUser();
 	public void menuShop();
-	public void menuSignUp();
-	public void menuLogIn();
+	public void menuRating(String password);
 	
 	public void writeToReceipt(String itemDetails);  //writes down item specs when it is added to cart
 	

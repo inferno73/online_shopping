@@ -3,9 +3,8 @@ import java.util.Arrays;
 
 public class Pants extends Clothes{
 	
-	static ArrayList<Pants> list = new ArrayList<>();
-	static int numberOf=0;
-	static ArrayList<String> types = new ArrayList<String>(Arrays.asList("trapeze", "skinny", "straight", "baggy"));
+	private static ArrayList<Pants> list = new ArrayList<>();
+	private static int numberOf=0;
 	private String length;
 	private boolean hasBelt;
 	
@@ -28,7 +27,7 @@ public class Pants extends Clothes{
 		this.length = length;
 	}
 
-	public boolean isHasBelt() {
+	public boolean doesHaveBelt() {
 		return hasBelt;
 	}
 
@@ -36,6 +35,21 @@ public class Pants extends Clothes{
 		this.hasBelt = hasBelt;
 	}
 
+	public static ArrayList<Pants> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<Pants> list) {
+		Pants.list = list;
+	}
+
+	public static int getNumberOf() {
+		return numberOf;
+	}
+
+	public static void setNumberOf(int numberOf) {
+		Pants.numberOf = numberOf;
+	}
 	@Override
 	public String toString() {
 		return "Pants [length=" + length + ", hasBelt=" + hasBelt + "]";
