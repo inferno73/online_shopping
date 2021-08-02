@@ -11,7 +11,7 @@ public class Validation {
     // kod kreiranja usera prvi put
     // check username
     public static boolean alreadyTakenUsername(String username) {
-    	if(usernamePassword.containsKey(username)) {
+    	if(User.getCredentials().containsKey(username)) {
     		//System.out.println("Already taken username.");
     		return true;
     	}
@@ -19,13 +19,13 @@ public class Validation {
     }
     
     public static boolean alreadyTakenPassword(String password) {
-    	if(usernamePassword.containsKey(password)) {
+    	if(User.getCredentials().containsKey(password)) {
     		//System.out.println("Already taken password.");
     		return true;
     	}
     	return false;
     }
-    //TODO zavrsiti metodu, kao parametar dodati sve liste usera - 3 liste i roz svaku proci traziti 
+    //TODO zavrsiti metodu, kao parametar dodati sve liste usera - 3 liste i kroz svaku proci traziti 
     //da li ima proslijedjeni broj ILI dodati listu objekata iz usera koja je pod kommentarom pa preko nje pristupati broju racuna
     public static boolean alreadyTakenBankAccount(int number, ) {
     	if()) {
@@ -36,9 +36,9 @@ public class Validation {
     }
     // kod logina 
     // check username and password
-    public static boolean notValidLogin(String username, String password) {
-    	if(usernamePassword.containsKey(username) && usernamePassword.get(username).equals(password)) {
-    		//System.out.println("Not valid login.");
+    public static boolean invalidLogin(String username, String password) {
+    	if(User.getCredentials().containsKey(username) && User.getCredentials().get(username).equals(password)) {
+    		//System.out.println("Invalid login.");
     		return true;
     	}
     	return false;
@@ -46,7 +46,7 @@ public class Validation {
     
     // check numberOfBankAccount
     public static boolean validNumberOfBankAccount(String username, String numberOfBankAccount) {
-    	return usernameNumOfBankAcc.containsKey(username) && usernameNumOfBankAcc.get(username).equals(numberOfBankAccount);
+    	return usernameNumOfBankAcc.containsKey(username) && (User.getCredentials().get(username).equals(numberOfBankAccount);
     }
 
     // check money on bank account

@@ -12,6 +12,7 @@ public class Jewelry extends Item{
 	Jewelry(){
 		numberOf++;
 	}
+	
 	Jewelry(double price, String material, double grams){
 		super(price, material);
 		this.grams=grams;
@@ -33,12 +34,15 @@ public class Jewelry extends Item{
 		
 		return result;
 	}
+	
 	public double getGrams() {
 		return grams;
 	}
+	
 	public void setGrams(double grams) {
 		this.grams = grams;
 	}
+	
 	@Override
 	public String toString() {
 		return "Jewelry [grams=" + grams + ", goldKoef=" + goldCoeff + ", silverKoef=" + silverCoeff

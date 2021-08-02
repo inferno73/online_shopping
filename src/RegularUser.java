@@ -6,7 +6,7 @@ public class RegularUser extends User {
 		super(username, password, numberOfBankAccount);
 		setHasShipping(true);
 		//if from desired country shipping $5 otherwise $20
-		}
+	}
 	
 	
 	//private static ArrayList<RegularUser> list = new ArrayList<RegularUser>();
@@ -19,12 +19,12 @@ public class RegularUser extends User {
 	//	RegularUser.list = list;
 	//}
 
-		@Override
-		void finishShopping(double total) {
-			ShopMethods shopMethods = ShopMethods.getInstance();
-			//TODO deal with shipping
-			shopMethods.giveAReceipt(total);
-			
-		}
+	@Override
+	void finishShopping(double total) {
+		ShopMethods shopMethods = ShopMethods.getInstance();
+		//TODO deal with shipping
+		shopMethods.giveAReceipt(total);
+		
+	}
 
 }

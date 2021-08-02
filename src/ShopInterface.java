@@ -10,6 +10,7 @@ public interface ShopInterface {
 	 
 	//TODO Kanita - pokusaj da imas samo ove dvije metode ispod, pa da ih OVERLOAD u ShopMethods i dajes joj parametre razlicitog tipa tj listu objekata, ako ne bude
 	//moglo tako, onda ih izbrisi a u shopMethods da imas overloadane samo metode bez overridinga
+/*	
 	public void saveToList();
 	
 	public void saveToFile();
@@ -17,10 +18,10 @@ public interface ShopInterface {
 	public void saveFileToList(String fileName, ArrayList<?> list); //TODO add parameters lista i ime filea
 	
 	public void saveListToFile(String fileName, ArrayList<?> list);  //TODO add parameters lista i ime filea
+*/	
 	
-	
-	/* TODO kodove ovih metoda iskoristi kad uradis OVERLOAD ovih iznad u shopMethods
-	 * 
+	 //TODO kodove ovih metoda iskoristi kad uradis OVERLOAD ovih iznad u shopMethods
+	  
 	 public void saveToListPants();
 	
 	public void saveToFilePants();
@@ -52,8 +53,6 @@ public interface ShopInterface {
 	public void saveToListAdmin();
 	
 	public void saveToFileAdmin();
-	
-	*/
 	
 	
 	//MENUS
