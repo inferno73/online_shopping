@@ -23,7 +23,7 @@ public class Main {
 		System.out.println("Welcome to our online shop! ");
 		System.out.print("Our average rating: " + method.calculateRating());
 		
-		// SignUp or LogIn 
+		
 		method.menuWelcome();
 		//SignUp
 		//LogIn

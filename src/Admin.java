@@ -31,12 +31,12 @@ public class Admin extends User {
 		User.getCredentials().remove(username);
 	}
 
-	//TODO
 	@Override
 	void finishShopping(double total) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		total = total * SHIPPING_DISCOUNT;
 		shopMethods.giveAReceipt(total);
+		//TODO
 		
 	}
 

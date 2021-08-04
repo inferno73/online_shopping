@@ -445,7 +445,7 @@ public class ShopMethods implements ShopInterface {
 	}
 	
 	@Override
-	public void menuAdmin(){
+	public void menuAdmin(Item item, String username){
 
 	    while(true) {
 
@@ -462,14 +462,14 @@ public class ShopMethods implements ShopInterface {
 
 	            switch(option) {
 	            case 1: 
-	                // addItemToList (item);
+	                Admin.getInstance().addItemToList(item);
 	                break;
 	            case 2:
 	                System.out.println("Remove a User");
 	                System.out.println();
 	                System.out.println("Username: ");
 	                String username = input.next();
-					//removeAUser (username);
+					Admin.getInstance().removeAUser(username);
 					System.out.println();
 					menuAdmin();
 	                break;
@@ -478,7 +478,7 @@ public class ShopMethods implements ShopInterface {
 	                System.out.println();
 	                System.out.println("NewPassword: ");
 	                String newPassword = input.next();
-					//changePassword (newPassword);
+					Admin.getInstance().changePassword(newPassword);
 					System.out.println();
 					menuAdmin();
 	                break;
@@ -526,13 +526,13 @@ public class ShopMethods implements ShopInterface {
                     menuShop();
                     break;
                 case 2:            		
-            		//for (int i = 0; i < User.getList().size(); i++)
-            		//{
-            			//if(User.getList().get(i).getUsername() == username)
-            			//{
-                			//BankAccount.getList.get(i).getNumberofBankAccount(User.getList().get(i).getNumberOfBankAccount();).toString();
-            			//}
-            		//}
+            		/*for (int i = 0; i < User.getList().size(); i++)
+            		{
+            			if(User.getList().get(i).getUsername() == username)
+            			{
+                			BankAccount.getList.get(i).getNumberofBankAccount(User.getList().get(i).getNumberOfBankAccount();).toString();
+            			}
+            		}*/
                     break;
                 case 3:
                 	brr=1;
@@ -625,8 +625,6 @@ public class ShopMethods implements ShopInterface {
     }
 	
 	
-	
-	//TODO spremiti ocjenu
 	@Override
 	public void menuRating(String password) {
 		for(User user : User.getList()) {
@@ -639,7 +637,6 @@ public class ShopMethods implements ShopInterface {
 	    			int option = input.nextInt();
 	    			
 	    			switch(option) {
-	    			//ako zeli, unijeti i spremiti ocjenu
 	    			case 1:
 	    				System.out.println("Rate our store with 1-5 stars");
 	    				user.setRate(input.nextInt());
@@ -669,7 +666,7 @@ public class ShopMethods implements ShopInterface {
 	                switch(option) {
 	                case 1: 
 	                	determineShippingInfo();
-	                	//calculateTotal(itemPrice, previousTotal);
+	                	//finishShoping(total)
 						//menuMakeAPurchase();
 	                    break;
 	               
@@ -710,7 +707,6 @@ public class ShopMethods implements ShopInterface {
 
                 switch(option) {
                 case 1: 
-					//finishShopping(total);
 					System.out.println("Thank You!");
 					countPurchases(username);
                     break;

@@ -1,9 +1,8 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class BankAccount {
 	
-	//treba li?
-	//private static ArrayList<BankAccount> list = new ArrayList<BankAccount>();
+	private static ArrayList<BankAccount> list = new ArrayList<BankAccount>();
 	BankAccount() {
 		
 	}
@@ -42,7 +41,7 @@ public class BankAccount {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
- /*
+
 	public static ArrayList<BankAccount> getList() {
 		return list;
 	}
@@ -50,7 +49,6 @@ public class BankAccount {
 	public static void setList(ArrayList<BankAccount> list) {
 		BankAccount.list = list;
 	}
-*/
 	
 	
 	
