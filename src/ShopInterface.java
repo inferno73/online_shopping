@@ -42,9 +42,9 @@ public interface ShopInterface {
 	
 	public void saveToFileFormalShoes();
 	
-	public void saveToListRegularUser();
+	public void saveToListUser();
 	
-	public void saveToFileRegularUser();
+	public void saveToFileUser();
 	
 	public void saveToListVIPUser();
 	
@@ -59,7 +59,7 @@ public interface ShopInterface {
 	public void menuWelcome();
 	public void menuSignUp();
 	public void menuLogIn();
-	public void menuAdmin();
+	public void menuAdmin(Item);
 	public void menuUser();
 	public void menuShop();
 	public void menuRating(String password);

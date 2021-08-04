@@ -1,4 +1,4 @@
-import java.util.HashMap;
+//import java.util.HashMap;
 
 public class Validation {
 	
@@ -46,8 +46,16 @@ public class Validation {
     }
     
     // check numberOfBankAccount
-    public static boolean validNumberOfBankAccount(String username, String numberOfBankAccount) {
-    	return usernameNumOfBankAcc.containsKey(username) && (User.getCredentials().get(username).equals(numberOfBankAccount);
+    public static boolean validNumberOfBankAccount(String username, int numberOfBankAccount) {
+    	for (int i = 0; i < User.getList().size(); i++){
+			if(User.getList().get(i).getUsername() == username){
+				if(User.getList().get(i).getNumberOfBankAccount() == numberOfBankAccount) {
+					//System.out.println("Valid Number of BankAccount.");
+					return true;
+				}
+			}
+		}
+    	return false;
     }
 
     // check money on bank account

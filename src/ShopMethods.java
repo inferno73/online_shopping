@@ -424,7 +424,7 @@ public class ShopMethods implements ShopInterface {
 			while(true) {
 				System.out.println("Bank account number: ");
 				accountNumber = input.nextInt();
-				//TODO metoda ispod
+				
 				if (Validation.alreadyTakenBankAccount(accountNumber)) { 
 					System.out.println("This bank account is already taken, please enter a different one.");
 					System.out.println();
@@ -445,7 +445,7 @@ public class ShopMethods implements ShopInterface {
 	}
 	
 	@Override
-	public void menuAdmin(Item item, String username){
+	public void menuAdmin(){
 
 	    while(true) {
 
@@ -462,7 +462,8 @@ public class ShopMethods implements ShopInterface {
 
 	            switch(option) {
 	            case 1: 
-	                Admin.getInstance().addItemToList(item);
+	            	System.out.println("Add New Item: ");
+	            	menuAddNewItem();
 	                break;
 	            case 2:
 	                System.out.println("Remove a User");
@@ -731,11 +732,214 @@ public class ShopMethods implements ShopInterface {
         }
 	}
 	
+	public void menuAddNewItem(){
+
+	    while(true) {
+
+	        System.out.println("Choose an option: ");
+	        System.out.println("1. Pants");
+	        System.out.println("2. Shirt");
+	        System.out.println("3. Formal Shoes");
+	        System.out.println("4. Sneakers");
+	        System.out.println("5. Jewerly");
+	        System.out.println("6. Back");
+	        System.out.println("7. Exit");
+
+	        try {
+	            int option = input.nextInt();
+	            int brr=0; 
+
+	            switch(option) {
+	            case 1:
+	            	System.out.println("Add Pants" );
+	            	Pants pants = new Pants();
+					
+	            	System.out.println("Color: ");
+					pants.setColor(input.next());
+					
+					int br=0;
+					while(br==0)
+					{
+						System.out.println("Has Belt: ");
+						System.out.println("(Input YAS or NO!)");
+						String hasBelt = input.next();
+						
+					if(hasBelt.equals("YAS")) {
+						pants.setHasBelt(true);
+						br = 1;
+					}
+					else if (hasBelt.equals("NO")) {
+						pants.setHasBelt(false);
+						br = 1;
+					}
+					else {
+						System.out.println("Invalid input. Try again.");
+						br = 0;
+					}
+					}
+					
+					System.out.println("Length: ");
+					pants.setLength(input.next());
+					
+					System.out.println("Material: ");
+					pants.setMaterial(input.next());
+					
+					System.out.println("Size: ");
+					pants.setSize(input.next());
+					
+					System.out.println("Price: ");
+					pants.setPrice(input.nextDouble());
+					
+					//Pants.getList().add(pants);
+	            	break;
+	            	
+	            case 2:
+	            	System.out.println("Add Shirt" );
+	            	Shirt shirt = new Shirt();
+	            	
+	            	System.out.println("Color: ");
+					shirt.setColor(input.next());
+					
+					int br2=0;
+					while(br2==0)
+					{
+						System.out.println("Has Buttons: ");
+						System.out.println("(Input YAS or NO!)");
+						String hasButtons = input.next();
+						
+					if(hasButtons.equals("YAS")) {
+						shirt.setHasButtons(true);
+						br2 = 1;
+					}
+					else if (hasButtons.equals("NO")) {
+						shirt.setHasButtons(false);
+						br2 = 1;
+					}
+					else {
+						System.out.println("Invalid input. Try again.");
+						br2 = 0;
+					}
+					}
+					
+					System.out.println("Sleeve length: ");
+					shirt.setSleeveLength(input.next());
+					
+					System.out.println("Material: ");
+					shirt.setMaterial(input.next());
+					
+					System.out.println("Size: ");
+					shirt.setSize(input.next());
+					
+					System.out.println("Price: ");
+					shirt.setPrice(input.nextDouble());
+					
+					//Shirt.list.add(shirt);
+	            	break;
+	            	
+	            case 3: 
+	            	System.out.println("Add Formal Shoes: ");
+	            	
+	            	FormalShoes formalshoes = new FormalShoes();
+					
+	            	System.out.println("Material: ");
+					formalshoes.setMaterial(input.next());
+					
+					System.out.println("Price: ");
+					formalshoes.setPrice(input.nextDouble());
+					
+					//FormalShoes.list.add(formalshoes);
+	                break;
+	                
+	            case 4:
+	                System.out.println("Add Sneakers: ");
+	                
+	                Sneakers sneakers = new Sneakers();
+	                
+	                System.out.println("Brand: ");
+					sneakers.setBrand(input.next());
+					
+					int br3=0;
+					while(br3==0)
+					{
+						System.out.println("For Sports: ");
+						System.out.println("(Input YAS or NO!)");
+						String forSports = input.next();
+						
+					if(forSports.equals("YAS")) {
+						sneakers.setForSports(true);
+						br3 = 1;
+					}
+					else if (forSports.equals("NO")) {
+						sneakers.setForSports(false);
+						br3 = 1;
+					}
+					else {
+						System.out.println("Invalid input. Try again.");
+						br3 = 0;
+					}
+					}
+					
+					System.out.println("Material: ");
+					sneakers.setMaterial(input.next());
+					
+					System.out.println("Price: ");
+					sneakers.setPrice(input.nextDouble());
+					
+					//Sneakers.list.add(sneakers);
+	                break;
+	                
+	            case 5:
+	            	System.out.println("Add Jewerly: ");
+	            	
+	            	Jewelry jewelry = new Jewelry();
+	            	
+	            	System.out.println("Material: ");
+					jewelry.setMaterial(inputFile.next());
+					
+					System.out.println("Price: ");
+					jewelry.setPrice(inputFile.nextDouble());
+					
+					//Jewelry.list.add(jewelry);
+	                break;
+	                
+	            case 6:
+	                menuAdmin();
+	                break;
+	                
+	            case 7:
+	            	brr=1;
+	            	break;
+	            }
+
+	            if(brr==1) {
+	                //pohraniUFile();
+	                break;
+	            }
+
+	        } catch(InputMismatchException e) {
+	            input.nextLine();
+	            System.out.println("Invalid input. Try again.");
+	            System.out.println();
+	            menuAdmin();
+	        }
+
+	    }
+	    System.out.println("Application is closed successfully.");
+
+	}
+	
 	
 	@Override
 	public double calculateTotal(double itemPrice, double previousTotal) {
 		double total = previousTotal + itemPrice;
 		return total;
+	}
+
+	@Override
+	public void determineShippingInfo() {
+		//trazi adresu
+		//trazi drzavz na osnovu nje odredi shipping
+		
 	}
 
 	@Override
@@ -749,13 +953,6 @@ public class ShopMethods implements ShopInterface {
 		
 	}
 
-	@Override
-	public void determineShippingInfo() {
-		//trazi adresu
-		//trazi drzavz na osnovu nje odredi shipping
-		
-	}
-	
 	@Override
 	public double calculateRating() {
 		double result=0, numberOfRatings=0, currentRating=0;

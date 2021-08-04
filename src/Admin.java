@@ -20,13 +20,13 @@ public class Admin extends User {
 		single_instance.setPassword(newPassword);
 	}
 	
-	//TODO
-	public void addItemToList(Item item) {
+	
+	/*public void addItemToList(Item item) {
 		//nabavka - dodati "nove objekte ili items"
 		
 	}
-	//pa save u listu
-	
+	//pa save u listu 
+	*/
 	public void removeAUser(String username) {
 		User.getCredentials().remove(username);
 	}
