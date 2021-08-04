@@ -25,13 +25,15 @@ public class Validation {
     	}
     	return false;
     }
-    //TODO zavrsiti metodu, kao parametar dodati sve liste usera - 3 liste i kroz svaku proci traziti 
+    //zavrsiti metodu, kao parametar dodati sve liste usera - 3 liste i kroz svaku proci traziti 
     //da li ima proslijedjeni broj ILI dodati listu objekata iz usera koja je pod kommentarom pa preko nje pristupati broju racuna
-    public static boolean alreadyTakenBankAccount(int number, ) {
-    	if()) {
-    		//System.out.println("Already taken username.");
-    		return true;
-    	}
+    public static boolean alreadyTakenBankAccount(int number) {
+    	for (int i = 0; i < User.getList().size(); i++){
+			if(User.getList().get(i).getNumberOfBankAccount() == number){
+				//System.out.println("Already taken username.");
+				return true;
+			}
+		}
     	return false;
     }
     // kod logina 

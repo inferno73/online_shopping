@@ -453,7 +453,7 @@ public class ShopMethods implements ShopInterface {
 	        System.out.println("1. Add New Item");
 	        System.out.println("2. Remove a User");
 	        System.out.println("3. Change your password");
-	        System.out.println("4. Buy");
+	        System.out.println("4. Go to shop");
 	        System.out.println("5. Exit");
 
 	        try {
@@ -462,20 +462,31 @@ public class ShopMethods implements ShopInterface {
 
 	            switch(option) {
 	            case 1: 
-	                //
+	                // addItemToList (item);
 	                break;
 	            case 2:
-	                //
+	                System.out.println("Remove a User");
+	                System.out.println();
+	                System.out.println("Username: ");
+	                String username = input.next();
+					//removeAUser (username);
+					System.out.println();
+					menuAdmin();
 	                break;
 	            case 3:
-	                //
+	            	System.out.println("Change password");
+	                System.out.println();
+	                System.out.println("NewPassword: ");
+	                String newPassword = input.next();
+					//changePassword (newPassword);
+					System.out.println();
+					menuAdmin();
 	                break;
 	            case 4:
-	                //
+	                menuShop();
 	                break;
 	            case 5:
 	            	brr=1;
-	            	//
 	            	break;
 	            }
 
@@ -514,12 +525,17 @@ public class ShopMethods implements ShopInterface {
                 case 1: 
                     menuShop();
                     break;
-                case 2:
-                    //
+                case 2:            		
+            		//for (int i = 0; i < User.getList().size(); i++)
+            		//{
+            			//if(User.getList().get(i).getUsername() == username)
+            			//{
+                			//BankAccount.getList.get(i).getNumberofBankAccount(User.getList().get(i).getNumberOfBankAccount();).toString();
+            			//}
+            		//}
                     break;
                 case 3:
                 	brr=1;
-                    //
                     break;
                 }
                 
@@ -552,7 +568,7 @@ public class ShopMethods implements ShopInterface {
             System.out.println("5. Jewelry");
             System.out.println("6. End Shopping");
             System.out.println("7. Back");
-            System.out.println("8. Exit"); // break;
+            System.out.println("8. Exit");
 
 
             try {
@@ -581,14 +597,13 @@ public class ShopMethods implements ShopInterface {
                 	//method.printFromFile("jewelry.txt");
                     break;
                 case 6:
-                    //
+                    menuEndShopping();
                     break;
                 case 7:
-                    //menuUser();
+                    menuUser();
                     break;
                 case 8:
                     brr=1;
-                    //
                     break;
                 }
 
@@ -654,8 +669,8 @@ public class ShopMethods implements ShopInterface {
 	                switch(option) {
 	                case 1: 
 	                	determineShippingInfo();
-	                	// TODO cost
-						// make a purchase
+	                	//calculateTotal(itemPrice, previousTotal);
+						//menuMakeAPurchase();
 	                    break;
 	               
 	                case 2:
@@ -679,7 +694,7 @@ public class ShopMethods implements ShopInterface {
 	        }
 	}
 	
-	public void menuMakeAPurchase ()
+	public void menuMakeAPurchase (double total, String username)
 	{
 		while(true) {
 
@@ -695,9 +710,9 @@ public class ShopMethods implements ShopInterface {
 
                 switch(option) {
                 case 1: 
-					// TODO giveAReceipt (total);
-					//System.out.println("Thank You!");
-					//countPurchases(username);
+					//finishShopping(total);
+					System.out.println("Thank You!");
+					countPurchases(username);
                     break;
                
                 case 2:
@@ -772,12 +787,9 @@ public class ShopMethods implements ShopInterface {
 	{
 		VIPUser newVIPUser = new VIPUser ();
 		
-		for (int i = 0; i < User.getList().size(); i++)
-		{
-			if(User.getList().get(i).getUsername() == username)
-			{
-				if(User.getList().get(i).getNumberOfPurchases() >= 4)
-				{
+		for (int i = 0; i < User.getList().size(); i++){
+			if(User.getList().get(i).getUsername() == username){
+				if(User.getList().get(i).getNumberOfPurchases() >= 4){
 					newVIPUser.setUsername(User.getList().get(i).getUsername());
 					newVIPUser.setPassword(User.getList().get(i).getPassword());
 					newVIPUser.setNumberOfBankAccount(User.getList().get(i).getNumberOfBankAccount());
@@ -787,18 +799,13 @@ public class ShopMethods implements ShopInterface {
 					VIPUser.getVIPlist().add(newVIPUser);
 				}
 			}
-
 		}
 	}
 	
 	public void countPurchases (String username)
-	{
-		//VIPUser newVIPUser = new VIPUser ();
-		
-		for (int i = 0; i < User.getList().size(); i++)
-		{
-			if(User.getList().get(i).getUsername() == username)
-			{
+	{	
+		for (int i = 0; i < User.getList().size(); i++){
+			if(User.getList().get(i).getUsername() == username){
 				User.getList().get(i).setNumberOfPurchases(User.getList().get(i).getNumberOfPurchases() + 1);
 			}
 

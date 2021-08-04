@@ -1,6 +1,9 @@
+//import java.util.ArrayList;
 
 public class BankAccount {
 	
+	//treba li?
+	//private static ArrayList<BankAccount> list = new ArrayList<BankAccount>();
 	BankAccount() {
 		
 	}
@@ -39,7 +42,15 @@ public class BankAccount {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+ /*
+	public static ArrayList<BankAccount> getList() {
+		return list;
+	}
 
+	public static void setList(ArrayList<BankAccount> list) {
+		BankAccount.list = list;
+	}
+*/
 	
 	
 	
