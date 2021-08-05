@@ -383,7 +383,7 @@ public class ShopMethods implements ShopInterface {
 					if(Admin.getInstance().getPassword().equals(password))
 						menuAdmin();
 					else
-						menuUser();
+						menuUser(username);
 				}
 			}
 			
@@ -509,7 +509,7 @@ public class ShopMethods implements ShopInterface {
 	}
 	
 	@Override
-	public void menuUser(){
+	public void menuUser(String username){
 		
 		while(true) {
 			
@@ -524,7 +524,7 @@ public class ShopMethods implements ShopInterface {
 
                 switch(option) {
                 case 1: 
-                    menuShop();
+                    menuShop(username);
                     break;
                 case 2:            		
             		/*for (int i = 0; i < User.getList().size(); i++)
@@ -557,7 +557,7 @@ public class ShopMethods implements ShopInterface {
 
     }
 	
-	public void menuShop(){
+	public void menuShop(String username){
 
         while(true) {
 
@@ -580,22 +580,115 @@ public class ShopMethods implements ShopInterface {
                 case 1: 
                     //
                 	//method.printFromFile("pants.txt");
+                	/*System.out.println("Choose an item from the list by entering the correct number: ");
+                	int itemNumber = input.nextInt();
+                	for(int i=0; i<Pants.list.size(); i++) {
+                		if(i==itemNumber) {
+                			double price = Pants.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.list.size(); i++) {
+                				if(User.list.get(j).getUsername.equals(username)) {
+                					User.list.get(j).addToCart(Pants.list.get(i));
+                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.list.size()) {
+                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.list.get(k).reduceAmount(price);
+                						}
+                					}
+                				}
+                			}
+                		}
+                	}*/
                     break;
                 case 2:
                     //
                 	//method.printFromFile("shirt.txt");
+                	/*System.out.println("Choose an item from the list by entering the correct number: ");
+                	int itemNumber = input.nextInt();
+                	for(int i=0; i<Shirt.list.size(); i++) {
+                		if(i==itemNumber) {
+                			double price = Shirt.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.list.size(); i++) {
+                				if(User.list.get(j).getUsername.equals(username)) {
+                					User.list.get(j).addToCart(Shirt.list.get(i));
+                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.list.size()) {
+                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.list.get(k).reduceAmount(price);
+                						}
+                					}
+                				}
+                			}
+                		}
+                	}*/
                     break;
                 case 3:
                     //
                 	//method.printFromFile("sneakers.txt");
+                	/*System.out.println("Choose an item from the list by entering the correct number: ");
+                	int itemNumber = input.nextInt();
+                	for(int i=0; i<Sneakers.list.size(); i++) {
+                		if(i==itemNumber) {
+                			double price = Sneakers.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.list.size(); i++) {
+                				if(User.list.get(j).getUsername.equals(username)) {
+                					User.list.get(j).addToCart(Sneakers.list.get(i));
+                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.list.size()) {
+                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.list.get(k).reduceAmount(price);
+                						}
+                					}
+                				}
+                			}
+                		}
+                		}*/
+                	
                     break;
                 case 4:
                     //
                 	//method.printFromFile("formalshoes.txt");
+                	/*System.out.println("Choose an item from the list by entering the correct number: ");
+                	int itemNumber = input.nextInt();
+                	for(int i=0; i<FormalShoes.list.size(); i++) {
+                		if(i==itemNumber) {
+                			double price = FormalShoes.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.list.size(); i++) {
+                				if(User.list.get(j).getUsername.equals(username)) {
+                					User.list.get(j).addToCart(FormalShoes.list.get(i));
+                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.list.size()) {
+                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.list.get(k).reduceAmount(price);
+                						}
+                					}
+                				}
+                			}
+                		}
+                		}*/
+                	
                     break;
                 case 5: 
                     //
                 	//method.printFromFile("jewelry.txt");
+                	/*System.out.println("Choose an item from the list by entering the correct number: ");
+                	int itemNumber = input.nextInt();
+                	for(int i=0; i<Jewelry.list.size(); i++) {
+                		if(i==itemNumber) {
+                			double price = Jewelry.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.list.size(); i++) {
+                				if(User.list.get(j).getUsername.equals(username)) {
+                					User.list.get(j).addToCart(Jewelry.list.get(i));
+                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.list.size()) {
+                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.list.get(k).reduceAmount(price);
+                						}
+                					}
+                				}
+                			}
+                		}
+                		}*/
+                	
                     break;
                 case 6:
                     menuEndShopping();
