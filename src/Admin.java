@@ -20,13 +20,6 @@ public class Admin extends User {
 		single_instance.setPassword(newPassword);
 	}
 	
-	
-	/*public void addItemToList(Item item) {
-		//nabavka - dodati "nove objekte ili items"
-		
-	}
-	//pa save u listu 
-	*/
 	public void removeAUser(String username) {
 		User.getCredentials().remove(username);
 	}
@@ -37,7 +30,7 @@ public class Admin extends User {
 		total = total * SHIPPING_DISCOUNT;
 		shopMethods.giveAReceipt(total);
 		//TODO
-		
+		System.out.println("Thank You!");
 	}
 
 }

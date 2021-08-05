@@ -2,7 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class User {
-	
+
+	private String username;
+	private String password;
+	private int numberOfBankAccount;
+	private int rate; //number of rating stars: 1 being bad and 5 excellent
+	private boolean hasShipping; //free for admin and vip
+	private int numberOfPurchases;
 	private static ArrayList<User> list = new ArrayList<User>();
 	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	
@@ -25,14 +31,6 @@ public abstract class User {
 		this.password = password;
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
-	
-	private String username;
-	private String password;
-	private int numberOfBankAccount;
-	private int rate; //number of rating stars: 1 being bad and 5 excellent
-	private boolean hasShipping; //free for admin and vip
-	private int numberOfPurchases;
-	
 
 	abstract void finishShopping(double total); //as the way of calculating the final price is different for each type of users
 

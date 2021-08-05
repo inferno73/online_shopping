@@ -1,10 +1,10 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class Shirt extends Clothes{
 	
 	static ArrayList<Shirt> list = new ArrayList<>();
-	static ArrayList<String> types = new ArrayList<String>(Arrays.asList("pullover", "blouse", "T-shirt", "shirt", "hoodie", "crop top"));
+	//static ArrayList<String> types = new ArrayList<String>(Arrays.asList("pullover", "blouse", "T-shirt", "shirt", "hoodie", "crop top"));
 	static int numberOf=0;
 	private boolean hasButtons;
 	private String sleeveLength;

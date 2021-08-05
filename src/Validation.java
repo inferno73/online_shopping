@@ -1,13 +1,6 @@
-//import java.util.HashMap;
 
 public class Validation {
-	
-	//TODO ove su visak, treba povezati sa onim koje su u user klasi: User.credentials ??? ovako su dupli podaci dvaput nepotrebno
-	/*static HashMap<String, String> usernamePassword = new HashMap<String, String>();
-	static HashMap<String, String> usernameNumOfBankAcc = new HashMap<String, String>();
-*/
-	
-	
+
     // kod kreiranja usera prvi put
     // check username
     public static boolean alreadyTakenUsername(String username) {

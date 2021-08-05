@@ -22,7 +22,7 @@ public interface ShopInterface {
 	
 	 //TODO kodove ovih metoda iskoristi kad uradis OVERLOAD ovih iznad u shopMethods
 	  
-	 public void saveToListPants();
+	public void saveToListPants();
 	
 	public void saveToFilePants();
 	
@@ -42,6 +42,7 @@ public interface ShopInterface {
 	
 	public void saveToFileFormalShoes();
 	
+/*
 	public void saveToListUser();
 	
 	public void saveToFileUser();
@@ -54,15 +55,20 @@ public interface ShopInterface {
 	
 	public void saveToFileAdmin();
 	
+	public void saveToListRegularUser();
+	
+	public void saveToFileRegularUser();
+*/	
 	
 	//MENUS
 	public void menuWelcome();
 	public void menuSignUp();
 	public void menuLogIn();
-	public void menuAdmin(Item);
-	public void menuUser();
-	public void menuShop();
+	public void menuAdmin();
+	public void menuUser(String username);
+	public void menuShop(String username);
 	public void menuRating(String password);
+	public void menuAddNewItem();
 	
 	public void writeToReceipt(String itemDetails);  //writes down item specs when it is added to cart
 	
@@ -74,6 +80,9 @@ public interface ShopInterface {
 	
 	public double calculateRating();
 	
+	public void becomeVIPUser(String username);
+	
+	public void countPurchases (String username);
 	
 	
 }

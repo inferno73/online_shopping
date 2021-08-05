@@ -15,8 +15,10 @@ public class VIPUser extends User {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		total = total * SHIPPING_DISCOUNT;
 		shopMethods.giveAReceipt(total);
+		
 		//skini sa racuna total, provjeri prvo validacija ima li dovoljno pa onda skini
-		//Validation.enoughMoney(accountNumber, total);
+		Validation.enoughMoney(, total);
+		System.out.println("Thank You!");
 	}
 
 	public static ArrayList<VIPUser> getVIPlist() {

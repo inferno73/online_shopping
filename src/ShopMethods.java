@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 //singleton class
@@ -13,10 +12,7 @@ public class ShopMethods implements ShopInterface {
 	static Scanner inputFile;
 	static Scanner input;
 
-	private ShopMethods()
-    {
-  
-    }
+	private ShopMethods() {}
   
     // static method to create instance of Singleton class
     public static ShopMethods getInstance()
@@ -27,7 +23,6 @@ public class ShopMethods implements ShopInterface {
         return single_instance;
     }
 	
-    
     
 	@Override
 	public void createFile(String fileName) {
@@ -75,7 +70,6 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Pants pants = new Pants();
-				// type?
 				pants.setColor(inputFile.next());
 				pants.setHasBelt(inputFile.nextBoolean()); 
 				pants.setLength(inputFile.next());
@@ -97,7 +91,6 @@ public class ShopMethods implements ShopInterface {
 			BufferedWriter writer = Files.newBufferedWriter(path);
 			
 			for(Pants pants : Pants.getList()) {	
-				// type?
 				writer.write("color: " + pants.getColor() + " ");
 				if(pants.doesHaveBelt())
 					writer.write("has belt");
@@ -124,7 +117,6 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Shirt shirt = new Shirt();
-				// type?
 				shirt.setColor(inputFile.next());
 				shirt.setHasButtons(inputFile.nextBoolean()); 
 				shirt.setSleeveLength(inputFile.next());
@@ -146,7 +138,6 @@ public class ShopMethods implements ShopInterface {
 			BufferedWriter writer = Files.newBufferedWriter(path);
 			
 			for(Shirt shirt : Shirt.list) {	
-				// type?
 				writer.write("color: " + shirt.getColor() + " ");
 				if(shirt.isHasButtons())
 					writer.write("has belt");
@@ -257,8 +248,8 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				FormalShoes formalshoes = new FormalShoes();
-				// type?
 				formalshoes.setMaterial(inputFile.next());
+				//writer.write("size: " + formalshoes.getSize() + " ");
 				formalshoes.setPrice(inputFile.nextDouble());
 				FormalShoes.list.add(formalshoes);
 			}
@@ -304,22 +295,6 @@ public class ShopMethods implements ShopInterface {
 		
 	}
 */	
-	
-
-	@Override
-	public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
-		createFile("receipt.txt");
-		Path path = Paths.get("receipt.txt");
-		try {
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			writer.write(itemDetails);
-			writer.write("\n");
-		} catch (IOException e) {
-			System.out.println("IOException occurred. StackTrace: ");
-			e.printStackTrace();
-		}
-		
-	}
 	
 //MENUS
 	@Override
@@ -484,7 +459,7 @@ public class ShopMethods implements ShopInterface {
 					menuAdmin();
 	                break;
 	            case 4:
-	                menuShop();
+	                menuShop(Admin.getInstance().getUsername()); //TODO je li uredu ovako?
 	                break;
 	            case 5:
 	            	brr=1;
@@ -527,21 +502,21 @@ public class ShopMethods implements ShopInterface {
                     menuShop(username);
                     break;
                 case 2:            		
-            		/*for (int i = 0; i < User.getList().size(); i++)
+            		for (int i = 0; i < User.getList().size(); i++)
             		{
             			if(User.getList().get(i).getUsername() == username)
             			{
-                			BankAccount.getList.get(i).getNumberofBankAccount(User.getList().get(i).getNumberOfBankAccount();).toString();
+                			//BankAccount.getList().get(i).getNumberOfBankAccount();
+            				//BankAccount.getList.get(i).getNumberofBankAccount(User.getList().get(i).getNumberOfBankAccount()).toString();
+            				break;
             			}
-            		}*/
-                    break;
+            		}
                 case 3:
                 	brr=1;
                     break;
                 }
                 
                 if(brr==1) {
-                    //pohraniUFile();
                     break;
                 }
                 
@@ -557,6 +532,7 @@ public class ShopMethods implements ShopInterface {
 
     }
 	
+	@Override
 	public void menuShop(String username){
 
         while(true) {
@@ -575,126 +551,139 @@ public class ShopMethods implements ShopInterface {
             try {
                 int option = input.nextInt();
                 int brr=0; 
-
+                int itemNumber;
                 switch(option) {
                 case 1: 
-                    //
                 	//method.printFromFile("pants.txt");
-                	/*System.out.println("Choose an item from the list by entering the correct number: ");
-                	int itemNumber = input.nextInt();
-                	for(int i=0; i<Pants.list.size(); i++) {
+
+                	System.out.println("Choose an item from the list by entering the correct number: ");
+                	itemNumber = input.nextInt();
+                	for(int i=0; i<Pants.getList().size(); i++) {
                 		if(i==itemNumber) {
-                			double price = Pants.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
-                			for(int j=0; j<User.list.size(); i++) {
-                				if(User.list.get(j).getUsername.equals(username)) {
-                					User.list.get(j).addToCart(Pants.list.get(i));
-                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
-                					for(int k=0; k<BankAccount.list.size()) {
-                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
-                							BankAccount.list.get(k).reduceAmount(price);
+                			double price = Pants.getList().get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
+                			for(int j=0; j<User.getList().size(); i++) {
+                				if(User.getList().get(j).getUsername().equals(username)) {
+                					User.getList().get(j).addToCart(Pants.getList().get(i));
+                					int currentNumberOfBankAccount=User.getList().get(i).getNumberOfBankAccount();
+                					for(int k=0; k< BankAccount.list.size(); k++) {
+                						if(BankAccount.getList().get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.getList().get(k).reduceAmount(price);
                 						}
                 					}
                 				}
                 			}
                 		}
-                	}*/
+                	}
                     break;
                 case 2:
-                    //
                 	//method.printFromFile("shirt.txt");
-                	/*System.out.println("Choose an item from the list by entering the correct number: ");
-                	int itemNumber = input.nextInt();
+                	System.out.println("Choose an item from the list by entering the correct number: ");
+                	itemNumber = input.nextInt();
                 	for(int i=0; i<Shirt.list.size(); i++) {
                 		if(i==itemNumber) {
                 			double price = Shirt.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
-                			for(int j=0; j<User.list.size(); i++) {
-                				if(User.list.get(j).getUsername.equals(username)) {
-                					User.list.get(j).addToCart(Shirt.list.get(i));
-                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
-                					for(int k=0; k<BankAccount.list.size()) {
-                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
-                							BankAccount.list.get(k).reduceAmount(price);
+                			for(int j=0; j<User.getList().size(); i++) {
+                				if(User.getList().get(j).getUsername().equals(username)) {
+                					User.getList().get(j).addToCart(Shirt.list.get(i));
+                					int currentNumberOfBankAccount=User.getList().get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.getList().size(); k++) {
+                						if(BankAccount.getList().get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.getList().get(k).reduceAmount(price);
                 						}
                 					}
                 				}
                 			}
                 		}
-                	}*/
+                	}
                     break;
                 case 3:
-                    //
                 	//method.printFromFile("sneakers.txt");
-                	/*System.out.println("Choose an item from the list by entering the correct number: ");
-                	int itemNumber = input.nextInt();
+                	System.out.println("Choose an item from the list by entering the correct number: ");
+                	itemNumber = input.nextInt();
                 	for(int i=0; i<Sneakers.list.size(); i++) {
                 		if(i==itemNumber) {
                 			double price = Sneakers.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
-                			for(int j=0; j<User.list.size(); i++) {
-                				if(User.list.get(j).getUsername.equals(username)) {
-                					User.list.get(j).addToCart(Sneakers.list.get(i));
-                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
-                					for(int k=0; k<BankAccount.list.size()) {
-                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
-                							BankAccount.list.get(k).reduceAmount(price);
+                			for(int j=0; j<User.getList().size(); i++) {
+                				if(User.getList().get(j).getUsername().equals(username)) {
+                					User.getList().get(j).addToCart(Sneakers.list.get(i));
+                					int currentNumberOfBankAccount=User.getList().get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.getList().size(); k++) {
+                						if(BankAccount.getList().get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.getList().get(k).reduceAmount(price);
                 						}
                 					}
                 				}
                 			}
                 		}
-                		}*/
-                	
+                	}
                     break;
                 case 4:
-                    //
                 	//method.printFromFile("formalshoes.txt");
-                	/*System.out.println("Choose an item from the list by entering the correct number: ");
-                	int itemNumber = input.nextInt();
+                	System.out.println("Choose an item from the list by entering the correct number: ");
+                	itemNumber = input.nextInt();
                 	for(int i=0; i<FormalShoes.list.size(); i++) {
                 		if(i==itemNumber) {
                 			double price = FormalShoes.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
-                			for(int j=0; j<User.list.size(); i++) {
-                				if(User.list.get(j).getUsername.equals(username)) {
-                					User.list.get(j).addToCart(FormalShoes.list.get(i));
-                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
-                					for(int k=0; k<BankAccount.list.size()) {
-                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
-                							BankAccount.list.get(k).reduceAmount(price);
+                			for(int j=0; j<User.getList().size(); i++) {
+                				if(User.getList().get(j).getUsername().equals(username)) {
+                					User.getList().get(j).addToCart(FormalShoes.list.get(i));
+                					int currentNumberOfBankAccount=User.getList().get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.getList().size(); k++) {
+                						if(BankAccount.getList().get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.getList().get(k).reduceAmount(price);
                 						}
                 					}
                 				}
                 			}
                 		}
-                		}*/
-                	
+                	}
                     break;
                 case 5: 
-                    //
                 	//method.printFromFile("jewelry.txt");
-                	/*System.out.println("Choose an item from the list by entering the correct number: ");
-                	int itemNumber = input.nextInt();
+                	System.out.println("Choose an item from the list by entering the correct number: ");
+                	itemNumber = input.nextInt();
                 	for(int i=0; i<Jewelry.list.size(); i++) {
                 		if(i==itemNumber) {
                 			double price = Jewelry.list.get(i).getPrice(); //provjeriti da li se moze pristupiti getteru iz sup klase
-                			for(int j=0; j<User.list.size(); i++) {
-                				if(User.list.get(j).getUsername.equals(username)) {
-                					User.list.get(j).addToCart(Jewelry.list.get(i));
-                					int currentNumberOfBankAccount=User.list.get(i).getNumberOfBankAccount();
-                					for(int k=0; k<BankAccount.list.size()) {
-                						if(BankAccount.list.get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
-                							BankAccount.list.get(k).reduceAmount(price);
+                			for(int j=0; j<User.getList().size(); i++) {
+                				if(User.getList().get(j).getUsername().equals(username)) {
+                					User.getList().get(j).addToCart(Jewelry.list.get(i));
+                					int currentNumberOfBankAccount=User.getList().get(i).getNumberOfBankAccount();
+                					for(int k=0; k<BankAccount.getList().size(); k++) {
+                						if(BankAccount.getList().get(k).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+                							BankAccount.getList().get(k).reduceAmount(price);
                 						}
                 					}
                 				}
                 			}
                 		}
-                		}*/
+                	}
                 	
                     break;
                 case 6:
-                    menuEndShopping();
+                	// ispisi racun
+                		//giveAReceipt(total));
+                	// zavrsi/uplati?
+	                
+                	System.out.println("1. Pay");
+                	System.out.println("2. Back to shopping");
+                	option = input.nextInt();
+                	switch (option) {
+                	case 1:
+						// trazi br racuna i adresu
+        	 				// determineShippingInfo
+        				// skini sa racuna
+                			// User.finishShoping(8);
+                		
+        				// countPurchases(username);
+        				break;
+					case 2: 
+						menuShop(username);
+						break;
                     break;
+                	}
                 case 7:
-                    menuUser();
+                    menuUser(username);
                     break;
                 case 8:
                     brr=1;
@@ -718,115 +707,8 @@ public class ShopMethods implements ShopInterface {
 
     }
 	
-	
 	@Override
-	public void menuRating(String password) {
-		for(User user : User.getList()) {
-			  if(user.getRate() !=0) {
-					System.out.println("Do you want to rate our store? ");
-	    			System.out.println("1. YES");
-	    			System.out.println("2. NO");
-	    			System.out.println();
-	    			System.out.println("Choose an option");
-	    			int option = input.nextInt();
-	    			
-	    			switch(option) {
-	    			case 1:
-	    				System.out.println("Rate our store with 1-5 stars");
-	    				user.setRate(input.nextInt());
-	    				break;
-	    			case 2:
-	    				break;
-	    			}
-				}
-				break;
-			}
-	}
-	
-	public void menuEndShopping ()
-	{
-		 while(true) {
-
-			 	System.out.println("End shopping?");
-			 	System.out.println();
-	            System.out.println("Choose an option: ");
-	            System.out.println("1. Yas");
-	            System.out.println("2. No");
-	            
-	            try {
-	                int option = input.nextInt();
-	                int brr=0; 
-
-	                switch(option) {
-	                case 1: 
-	                	determineShippingInfo();
-	                	//finishShoping(total)
-						//menuMakeAPurchase();
-	                    break;
-	               
-	                case 2:
-	                    brr=1;
-	                    menuShop();
-	                    break;
-	                }
-
-	                if(brr==1) {
-	                    //pohraniUFile();
-	                    break;
-	                }
-
-	            } catch(InputMismatchException e) {
-	                input.nextLine();
-	                System.out.println("Invalid input. Try again.");
-	                System.out.println();
-	                menuWelcome();
-	            }
-
-	        }
-	}
-	
-	public void menuMakeAPurchase (double total, String username)
-	{
-		while(true) {
-
-		 	System.out.println("Do you want to make purchase?");
-		 	System.out.println();
-            System.out.println("Choose an option: ");
-            System.out.println("1. Yas");
-            System.out.println("2. No");
-            
-            try {
-                int option = input.nextInt();
-                int brr=0; 
-
-                switch(option) {
-                case 1: 
-					System.out.println("Thank You!");
-					countPurchases(username);
-                    break;
-               
-                case 2:
-                    brr=1;
-                    menuShop();
-                    break;
-                }
-
-                if(brr==1) {
-                    //pohraniUFile();
-                    break;
-                }
-
-            } catch(InputMismatchException e) {
-                input.nextLine();
-                System.out.println("Invalid input. Try again.");
-                System.out.println();
-                menuWelcome();
-            }
-        }
-	}
-	
-	public void menuAddNewItem(){
-
+	public void menuAddNewItem() {
 	    while(true) {
 
 	        System.out.println("Choose an option: ");
@@ -854,14 +736,14 @@ public class ShopMethods implements ShopInterface {
 					while(br==0)
 					{
 						System.out.println("Has Belt: ");
-						System.out.println("(Input YAS or NO!)");
+						System.out.println("(Input Yes or No!)");
 						String hasBelt = input.next();
 						
-					if(hasBelt.equals("YAS")) {
+					if(hasBelt.equals("Yes")) {
 						pants.setHasBelt(true);
 						br = 1;
 					}
-					else if (hasBelt.equals("NO")) {
+					else if (hasBelt.equals("No")) {
 						pants.setHasBelt(false);
 						br = 1;
 					}
@@ -883,7 +765,7 @@ public class ShopMethods implements ShopInterface {
 					System.out.println("Price: ");
 					pants.setPrice(input.nextDouble());
 					
-					//Pants.getList().add(pants);
+					Pants.getList().add(pants);
 	            	break;
 	            	
 	            case 2:
@@ -897,14 +779,14 @@ public class ShopMethods implements ShopInterface {
 					while(br2==0)
 					{
 						System.out.println("Has Buttons: ");
-						System.out.println("(Input YAS or NO!)");
+						System.out.println("(Input Yes or No!)");
 						String hasButtons = input.next();
 						
-					if(hasButtons.equals("YAS")) {
+					if(hasButtons.equals("Yes")) {
 						shirt.setHasButtons(true);
 						br2 = 1;
 					}
-					else if (hasButtons.equals("NO")) {
+					else if (hasButtons.equals("No")) {
 						shirt.setHasButtons(false);
 						br2 = 1;
 					}
@@ -926,7 +808,7 @@ public class ShopMethods implements ShopInterface {
 					System.out.println("Price: ");
 					shirt.setPrice(input.nextDouble());
 					
-					//Shirt.list.add(shirt);
+					Shirt.list.add(shirt);
 	            	break;
 	            	
 	            case 3: 
@@ -940,7 +822,7 @@ public class ShopMethods implements ShopInterface {
 					System.out.println("Price: ");
 					formalshoes.setPrice(input.nextDouble());
 					
-					//FormalShoes.list.add(formalshoes);
+					FormalShoes.list.add(formalshoes);
 	                break;
 	                
 	            case 4:
@@ -955,21 +837,21 @@ public class ShopMethods implements ShopInterface {
 					while(br3==0)
 					{
 						System.out.println("For Sports: ");
-						System.out.println("(Input YAS or NO!)");
+						System.out.println("(Input Yes or No!)");
 						String forSports = input.next();
-						
-					if(forSports.equals("YAS")) {
-						sneakers.setForSports(true);
-						br3 = 1;
-					}
-					else if (forSports.equals("NO")) {
-						sneakers.setForSports(false);
-						br3 = 1;
-					}
-					else {
-						System.out.println("Invalid input. Try again.");
-						br3 = 0;
-					}
+							
+						if(forSports.equals("Yes")) {
+							sneakers.setForSports(true);
+							br3 = 1;
+						}
+						else if (forSports.equals("No")) {
+							sneakers.setForSports(false);
+							br3 = 1;
+						}
+						else {
+							System.out.println("Invalid input. Try again.");
+							br3 = 0;
+						}
 					}
 					
 					System.out.println("Material: ");
@@ -978,7 +860,7 @@ public class ShopMethods implements ShopInterface {
 					System.out.println("Price: ");
 					sneakers.setPrice(input.nextDouble());
 					
-					//Sneakers.list.add(sneakers);
+					Sneakers.list.add(sneakers);
 	                break;
 	                
 	            case 5:
@@ -992,7 +874,7 @@ public class ShopMethods implements ShopInterface {
 					System.out.println("Price: ");
 					jewelry.setPrice(inputFile.nextDouble());
 					
-					//Jewelry.list.add(jewelry);
+					Jewelry.list.add(jewelry);
 	                break;
 	                
 	            case 6:
@@ -1005,7 +887,8 @@ public class ShopMethods implements ShopInterface {
 	            }
 
 	            if(brr==1) {
-	                //pohraniUFile();
+	            	saveAllToList();
+	                saveAllToFile();
 	                break;
 	            }
 
@@ -1018,32 +901,30 @@ public class ShopMethods implements ShopInterface {
 
 	    }
 	    System.out.println("Application is closed successfully.");
-
 	}
 	
-	
 	@Override
-	public double calculateTotal(double itemPrice, double previousTotal) {
-		double total = previousTotal + itemPrice;
-		return total;
-	}
-
-	@Override
-	public void determineShippingInfo() {
-		//trazi adresu
-		//trazi drzavz na osnovu nje odredi shipping
-		
-	}
-
-	@Override
-	public void giveAReceipt(double total) {
-		//sysout all from receipt file -TODO dodati parametre u printFromFile()
-		printFromFile("receipt.txt");
-		System.out.println("----------------------------------");
-		//delivery address, shipping
-		//total
-		System.out.println("TOTAL: --------------- " + " $"+ total );
-		
+	public void menuRating(String password) {
+		for(User user : User.getList()) {
+			if(user.getRate() !=0) {
+				System.out.println("Do you want to rate our store? ");
+    			System.out.println("1. Yes");
+    			System.out.println("2. No");
+    			System.out.println();
+    			System.out.println("Choose an option");
+    			int option = input.nextInt();
+    			
+    			switch(option) {
+    			case 1:
+    				System.out.println("Rate our store with 1-5 stars");
+    				user.setRate(input.nextInt());
+    				break;
+    			case 2:
+    				break;
+    			}
+			}
+			break;
+		}
 	}
 
 	@Override
@@ -1068,9 +949,24 @@ public class ShopMethods implements ShopInterface {
 		
 		return result;
 	}
+
+	@Override
+	public double calculateTotal(double itemPrice, double previousTotal) {
+		double total = previousTotal + itemPrice;
+		return total;
+	}
 	
-	public void becomeVIPUser (String username)
-	{
+	@Override
+	public void countPurchases (String username)
+	{	
+		for (int i = 0; i < User.getList().size(); i++){
+			if(User.getList().get(i).getUsername() == username)
+				User.getList().get(i).setNumberOfPurchases(User.getList().get(i).getNumberOfPurchases() + 1);
+		}
+	}
+	
+	@Override
+	public void becomeVIPUser (String username) {
 		VIPUser newVIPUser = new VIPUser ();
 		
 		for (int i = 0; i < User.getList().size(); i++){
@@ -1087,79 +983,124 @@ public class ShopMethods implements ShopInterface {
 			}
 		}
 	}
-	
-	public void countPurchases (String username)
-	{	
-		for (int i = 0; i < User.getList().size(); i++){
-			if(User.getList().get(i).getUsername() == username){
-				User.getList().get(i).setNumberOfPurchases(User.getList().get(i).getNumberOfPurchases() + 1);
-			}
 
+	@Override
+	public void determineShippingInfo() {
+		System.out.println("Enter your delivery address: ");
+		String address = input.next();
+		
+		System.out.println("Choose your country: ");
+		System.out.println("1. Bosnia and Herzegovina");
+		System.out.println("2. Other");
+		int option = input.nextInt();
+		switch (option) {
+		//if from desired country shipping $5 otherwise $20
+		case 1: 
+			// shipping = 5;
+		case 2: 
+			// shipping = 20;
+		}	
+	}
+	
+	@Override
+	public void writeToReceipt(String itemDetails) {	//params ce biti item.toString
+		createFile("receipt.txt");
+		Path path = Paths.get("receipt.txt");
+		try {
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			writer.write(itemDetails);
+			writer.write("\n");
+		} catch (IOException e) {
+			System.out.println("IOException occurred. StackTrace: ");
+			e.printStackTrace();
 		}
+		
 	}
 		
+	@Override
+	public void giveAReceipt(double total) {
+		//sysout all from receipt file -TODO dodati parametre u printFromFile()
+		printFromFile("receipt.txt");
+		System.out.println("----------------------------------");
+		//delivery address, shipping
+		//total
+		System.out.println("TOTAL: --------------- " + " $"+ total );
+	}
+	
+	
+	
+	
+	
 
 	public void saveAllToFile() {
-		
 		saveToFilePants();
-		
 		saveToFileShirt();
-		
 		saveToFileJewelry();
-		
 		saveToFileSneakers();
-		
 		saveToFileFormalShoes();
 	}
+	
 	//TODO dodati za usere metode overloadane
 		
-		public void saveAllToList() {
-			saveToListPants();
-			saveToListShirt();
-			saveToListJewelry();
-			saveToListSneakers();
-			saveToListFormalShoes();
-			saveToListRegularUser();
-			saveToListVIPUser();
-			saveToListAdmin();
-		}
-
-		@Override
-		public void saveToListRegularUser() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveToFileRegularUser() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveToListVIPUser() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveToFileVIPUser() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveToListAdmin() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveToFileAdmin() {
-			// TODO Auto-generated method stub
-			
-		}
+	public void saveAllToList() {
+		saveToListPants();
+		saveToListShirt();
+		saveToListJewelry();
+		saveToListSneakers();
+		saveToListFormalShoes();
+		/*
+		saveToListRegularUser();
+		saveToListVIPUser();
+		saveToListAdmin();
+		*/
+	}
+/*
+	@Override
+	public void saveToListVIPUser() {
+		// TODO Auto-generated method stub
 		
-		
+	}
 
+	@Override
+	public void saveToFileVIPUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToListAdmin() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToFileAdmin() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToListUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToFileUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToListRegularUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveToFileRegularUser() {
+		// TODO Auto-generated method stub
+		
+	}
+*/
 }

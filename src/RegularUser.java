@@ -7,12 +7,15 @@ public class RegularUser extends User {
 		//if from desired country shipping $5 otherwise $20
 	}
 	
+	// TODO
 	@Override
 	void finishShopping(double total) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
-		//TODO deal with shipping
+		if( User.getUsername.getNumberOfPurchases >= 5) {
+			shopMethods.becomeVIPUser(getUsername());
+		}
 		shopMethods.giveAReceipt(total);
-		
+		System.out.println("Thank You!");
 	}
 
 }
