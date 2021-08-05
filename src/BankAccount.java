@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class BankAccount {
 	
+	
 	private static ArrayList<BankAccount> list = new ArrayList<BankAccount>();
 	BankAccount() {
 		
@@ -50,6 +51,11 @@ public class BankAccount {
 		BankAccount.list = list;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "BankAccount [numberOfBankAccount=" + numberOfBankAccount + ", amount=" + amount + "]";
+	}
+
+
 	
 }

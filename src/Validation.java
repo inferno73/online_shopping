@@ -52,13 +52,16 @@ public class Validation {
     }
 
     // check money on bank account
-    public static boolean enoughMoney(BankAccount numberOfBankAccount, int totalPrice) throws ClassNotFoundException {
-    	if(numberOfBankAccount.getAmount() >= totalPrice) 
-    		return true;
-    	else {
-    		//System.out.println("You do not have enough money on your bank account.");
-    		return false;
+    public static boolean enoughMoney(int numberOfBankAccount, double totalPrice) {
+    	
+    	for(int i=0; i<BankAccount.getList().size(); i++) {
+			if(BankAccount.getList().get(i).getNumberOfBankAccount() == numberOfBankAccount) {
+				if(BankAccount.getList().get(i).getAmount() >= totalPrice) {
+		    		return true;
+				}
+			}
     	}
+    	
+    	return false;
     }
-  
 }

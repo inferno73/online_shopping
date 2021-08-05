@@ -1,6 +1,10 @@
 
 public class RegularUser extends User {
-
+	
+	
+	RegularUser (){
+	
+	}
 	RegularUser(String username, String password, int numberOfBankAccount){ 
 		super(username, password, numberOfBankAccount);
 		setHasShipping(true);
@@ -9,13 +13,22 @@ public class RegularUser extends User {
 	
 	// TODO
 	@Override
-	void finishShopping(double total) {
+	void finishShopping(double total, int currentNumberOfBankAccount) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
-		if( User.getUsername.getNumberOfPurchases >= 5) {
-			shopMethods.becomeVIPUser(getUsername());
+		
+		if(Validation.enoughMoney(currentNumberOfBankAccount, total))
+		{
+			for(int i=0; i<BankAccount.getList().size(); i++) {
+				if(BankAccount.getList().get(i).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+					BankAccount.getList().get(i).reduceAmount(total);
+				}
+			}
 		}
+			
+		
 		shopMethods.giveAReceipt(total);
 		System.out.println("Thank You!");
+		
 	}
 
 }

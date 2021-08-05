@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Pants extends Clothes{
 	
-	private static ArrayList<Pants> list = new ArrayList<>();
+	static ArrayList<Pants> list = new ArrayList<>();
 	private static int numberOf=0;
 	private String length;
 	private boolean hasBelt;
@@ -32,14 +32,6 @@ public class Pants extends Clothes{
 
 	public void setHasBelt(boolean hasBelt) {
 		this.hasBelt = hasBelt;
-	}
-
-	public static ArrayList<Pants> getList() {
-		return list;
-	}
-
-	public static void setList(ArrayList<Pants> list) {
-		Pants.list = list;
 	}
 
 	public static int getNumberOf() {

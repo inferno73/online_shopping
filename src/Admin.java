@@ -11,7 +11,7 @@ public class Admin extends User {
 	public static Admin getInstance() {
 		if(single_instance==null) {
 			single_instance = new Admin();
-			single_instance.setPassword("OnlineAdmin73$");
+			single_instance.setPassword("OnlineAdmin73$"); //admin123
 		}
 		return single_instance;
 	}
@@ -25,11 +25,20 @@ public class Admin extends User {
 	}
 
 	@Override
-	void finishShopping(double total) {
+	void finishShopping(double total, int currentNumberOfBankAccount) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		total = total * SHIPPING_DISCOUNT;
+		
+		if(Validation.enoughMoney(currentNumberOfBankAccount, total))
+		{
+			for(int i=0; i<BankAccount.getList().size(); i++) {
+				if(BankAccount.getList().get(i).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+					BankAccount.getList().get(i).reduceAmount(total);
+				}
+			}
+		}
+		
 		shopMethods.giveAReceipt(total);
-		//TODO
 		System.out.println("Thank You!");
 	}
 

@@ -32,16 +32,7 @@ public abstract class User {
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
 
-	abstract void finishShopping(double total); //as the way of calculating the final price is different for each type of users
-
-	public void addToCart(Item item) {
-		//cijena i zapamtiti toString artikla jer to ispisati na kraju
-		ShopMethods shopMethods = ShopMethods.getInstance();
-		shopMethods.createFile("receipt.txt");  //if not created
-		shopMethods.writeToReceipt(item.toString()); //TOCHECK treba da se pozove metoda definisanog objekta npr pants a ne metoda items
-		//TODO remove added item from the list of available items: metoda da se pozove nakon ove u mainu i rijesi se ovaj problem
-		
-	}
+	abstract void finishShopping(double total, int currentNumberOfBankAccount); //as the way of calculating the final price is different for each type of users
 	
 	//store credentials
     public static void addCredentials(String username, String password) {

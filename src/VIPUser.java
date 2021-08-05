@@ -9,15 +9,22 @@ public class VIPUser extends User {
 		setHasShipping(false);
 	}
 	
-	//TODO - deal with racun stuff - OSTAVITI ZA MAIN!
+	
 	@Override
-	void finishShopping(double total) {
+	void finishShopping(double total, int currentNumberOfBankAccount) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		total = total * SHIPPING_DISCOUNT;
-		shopMethods.giveAReceipt(total);
 		
-		//skini sa racuna total, provjeri prvo validacija ima li dovoljno pa onda skini
-		Validation.enoughMoney(, total);
+		if(Validation.enoughMoney(currentNumberOfBankAccount, total))
+		{
+			for(int i=0; i<BankAccount.getList().size(); i++) {
+				if(BankAccount.getList().get(i).getNumberOfBankAccount() == currentNumberOfBankAccount) {
+					BankAccount.getList().get(i).reduceAmount(total);
+				}
+			}
+		}
+		shopMethods.giveAReceipt(total);
+
 		System.out.println("Thank You!");
 	}
 

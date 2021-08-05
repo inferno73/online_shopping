@@ -22,7 +22,8 @@ public class Main {
 		//TODO populate lists from file data
 		
 		System.out.println("Welcome to our online shop! ");
-		System.out.print("Our average rating: " + method.calculateRating());
+		System.out.println("Our average rating: " + method.calculateRating());
+		System.out.println();
 		
 		
 		method.menuWelcome();
