@@ -17,7 +17,6 @@ public class Main {
 		method.saveAllToList();
 		
 		System.out.println("Welcome to our online shop! ");
-		System.out.println("Our average rating: " + method.calculateRating());
 		System.out.println();
 		
 		method.menuWelcome();

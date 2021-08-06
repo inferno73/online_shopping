@@ -16,18 +16,7 @@ public class Admin extends User {
 		return single_instance;
 	}
 	
-	public void changePassword(String newPassword) {
-		single_instance.setPassword(newPassword);
-	}
 	
-	public void removeAUser(String username) {
-		for(int i = 9; i < User.getList().size(); i++)
-		{
-			if(User.getList().get(i).getUsername().equals(username)) {
-				User.getList().remove(User.getList().get(i));
-			}
-		}
-	}
 
 	@Override
 	void finishShopping(double total, int currentNumberOfBankAccount, int shipping) {

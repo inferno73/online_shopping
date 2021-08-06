@@ -165,10 +165,8 @@ public class ShopMethods implements ShopInterface {
 
 	        System.out.println("Choose an option: ");
 	        System.out.println("1. Add New Item");
-	        System.out.println("2. Remove a User");
-	        System.out.println("3. Change your password");
-	        System.out.println("4. Go to shop");
-	        System.out.println("5. Exit");
+	        System.out.println("2. Go to shop");
+	        System.out.println("3. Exit");
 
 	        try {
 	            int option = input.nextInt();
@@ -179,28 +177,12 @@ public class ShopMethods implements ShopInterface {
 	            	System.out.println("Add New Item: ");
 	            	menuAddNewItem();
 	                break;
+	                
 	            case 2:
-	                System.out.println("Remove a User");
-	                System.out.println();
-	                System.out.println("Username: ");
-	                String username = input.next();
-					Admin.getInstance().removeAUser(username);
-					System.out.println();
-					menuAdmin();
-	                break;
-	            case 3:
-	            	System.out.println("Change password");
-	                System.out.println();
-	                System.out.println("NewPassword: ");
-	                String newPassword = input.next();
-					Admin.getInstance().changePassword(newPassword);
-					System.out.println();
-					menuAdmin();
-	                break;
-	            case 4:
 	                menuShop("Admin"); 
 	                break;
-	            case 5:
+	                
+	            case 3:
 	            	brr=1;
 	            	break;
 	            }
@@ -671,6 +653,7 @@ public class ShopMethods implements ShopInterface {
                 	   break;
                    }
                    
+                   menuWelcome();
                    break;
                    
                case 2:
@@ -693,52 +676,6 @@ public class ShopMethods implements ShopInterface {
        }
 	}
 
-	@Override
-	public void menuRating(String password) {
-		for(User user : User.getList()) {
-			if(user.getRate() !=0) {
-				System.out.println("Do you want to rate our store? ");
-    			System.out.println("1. Yes");
-    			System.out.println("2. No");
-    			System.out.println();
-    			System.out.println("Choose an option");
-    			int option = input.nextInt();
-    			
-    			switch(option) {
-    			case 1:
-    				System.out.println("Rate our store with 1-5 stars");
-    				user.setRate(input.nextInt());
-    				break;
-    			case 2:
-    				break;
-    			}
-			}
-			break;
-		}
-	}
-	
-	@Override
-	public double calculateRating() {
-		double result=0, numberOfRatings=0, currentRating=0;
-		
-		for(int i=0; i<VIPUser.getList().size(); i++) {
-			if(VIPUser.getList().get(i).getRate() !=0) {
-				currentRating+=VIPUser.getList().get(i).getRate();
-				numberOfRatings++;
-			}
-		}
-		
-		for(int i=0; i<RegularUser.getList().size(); i++) {
-			if(RegularUser.getList().get(i).getRate() !=0) {
-				currentRating+=RegularUser.getList().get(i).getRate();
-				numberOfRatings++;
-			}
-		}
-		
-		result=currentRating/numberOfRatings;
-		
-		return result;
-	}
 
 	@Override
 	public double calculateTotal(double cost, int shipping) {
@@ -766,7 +703,6 @@ public class ShopMethods implements ShopInterface {
 					newVIPUser.setPassword(User.getList().get(i).getPassword());
 					newVIPUser.setNumberOfBankAccount(User.getList().get(i).getNumberOfBankAccount());
 					newVIPUser.setHasShipping(User.getList().get(i).getHasShipping());
-					newVIPUser.setRate(User.getList().get(i).getRate());
 					
 					VIPUser.getVIPlist().add(newVIPUser);
 					saveToFileVIPUser();
@@ -1071,7 +1007,6 @@ public class ShopMethods implements ShopInterface {
 				user.setUsername(inputFile.next());
 				user.setPassword(inputFile.next());
 				user.setNumberOfBankAccount(inputFile.nextInt());
-				user.setRate(inputFile.nextInt());
 				user.setHasShipping(Boolean.parseBoolean(inputFile.next()));
 				user.setNumberOfPurchases(inputFile.nextInt());
 				
@@ -1092,7 +1027,7 @@ public class ShopMethods implements ShopInterface {
 			
 			for(User user : User.getList()) {	
 				writer.write(user.getUsername() + " " + user.getPassword() + " " + user.getNumberOfBankAccount() + " " 
-				+  user.getRate() + " " + user.getHasShipping() + " " + user.getNumberOfPurchases()   );
+				 + user.getHasShipping() + " " + user.getNumberOfPurchases()   );
 				writer.write("\n");
 			}
 			writer.close();
@@ -1114,7 +1049,6 @@ public class ShopMethods implements ShopInterface {
 				vipUser.setPassword(inputFile.next());
 				vipUser.setNumberOfBankAccount(inputFile.nextInt());
 				vipUser.setHasShipping(Boolean.parseBoolean(inputFile.next()));
-				vipUser.setRate(inputFile.nextInt());
 				
 				User.getList().add(vipUser);
 			}
@@ -1132,7 +1066,7 @@ public class ShopMethods implements ShopInterface {
 			
 			for(VIPUser vipUser : VIPUser.getVIPlist()) {	
 				writer.write(vipUser.getUsername() + " " + vipUser.getPassword() + " " + vipUser.getNumberOfBankAccount() + " " 
-						+ vipUser.getHasShipping() + " " + vipUser.getRate());
+						+ vipUser.getHasShipping() );
 				writer.write("\n");
 			}
 			writer.close();

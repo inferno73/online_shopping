@@ -5,7 +5,6 @@ public abstract class User {
 	private String username;
 	private String password;
 	private int numberOfBankAccount;
-	private int rate; //number of rating stars: 1 being bad and 5 excellent
 	private boolean hasShipping; //free for admin and vip
 	private int numberOfPurchases;
 	private static ArrayList<User> list = new ArrayList<User>();
@@ -14,11 +13,10 @@ public abstract class User {
 		
 	}
 	
-	User (String username, String password, int numberOfBankAccount, int rate, boolean hasShipping, int numberOfPurchases){
+	User (String username, String password, int numberOfBankAccount,  boolean hasShipping, int numberOfPurchases){
 		this.username = username;
 		this.password = password;
 		this.numberOfBankAccount = numberOfBankAccount;
-		this.rate = rate;
 		this.hasShipping = hasShipping;
 		this.numberOfPurchases = numberOfPurchases;
 	}
@@ -64,13 +62,6 @@ public abstract class User {
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
 
-	public int getRate() {
-		return rate;
-	}
-
-	public void setRate(int rate) {
-		this.rate = rate;
-	}
 
 	public boolean getHasShipping() {
 		return hasShipping;

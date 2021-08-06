@@ -9,7 +9,6 @@ public interface ShopInterface {
 	public void menuAdmin();
 	public void menuUser(String username);
 	public void menuShop(String username);
-	public void menuRating(String password);
 	public void menuAddNewItem();
 	public void menuEndShopping (String username, double cost);
 	
@@ -19,8 +18,6 @@ public interface ShopInterface {
 	public double calculateTotal(double cost, int shipping); //returns total price: adds new expense to previous expense
 	
 	public int determineShippingInfo();
-	
-	public double calculateRating();
 	
 	public void becomeVIPUser(String username);
 	
