@@ -43,7 +43,6 @@ public class Validation {
     	for (int i = 0; i < User.getList().size(); i++){
 			if(User.getList().get(i).getUsername() == username){
 				if(User.getList().get(i).getNumberOfBankAccount() == numberOfBankAccount) {
-					//System.out.println("Valid Number of BankAccount.");
 					return true;
 				}
 			}

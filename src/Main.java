@@ -1,13 +1,9 @@
 import java.io.IOException;
-import java.util.Scanner;
+
 public class Main {
-	static Scanner input = new Scanner (System.in);
-	static Scanner inputFile;
 	
 	public static void main(String[] args) throws IOException {
-		
-		//  @Override
-		
+
 		ShopMethods method = ShopMethods.getInstance();
 		
 		method.createFile("pants.txt");
@@ -15,18 +11,17 @@ public class Main {
 		method.createFile("jewelry.txt");
 		method.createFile("sneakers.txt");
 		method.createFile("formal_shoes.txt");
-		method.createFile("regular_user.txt");
+		method.createFile("user.txt");
 		method.createFile("vip_user.txt");
-		method.createFile("admin.txt");
-	
-		//TODO populate lists from file data
+		method.saveAllToList();
 		
 		System.out.println("Welcome to our online shop! ");
 		System.out.println("Our average rating: " + method.calculateRating());
 		System.out.println();
 		
-		
 		method.menuWelcome();
+
+		method.saveAllToFile();
 		//SignUp
 		//LogIn
 			//Admin meni 
@@ -48,7 +43,7 @@ public class Main {
 							// add cost
 					
 						// End Shopping?
-							// YAS
+							// YES
 								// discount?
 									// input adress
 									// input country
@@ -59,7 +54,7 @@ public class Main {
 										 * COST:
 										 */
 									// do you want to make a purchase?
-										// YAS
+										// YES
 											// report
 											// Tank You...
 										// NO
@@ -67,7 +62,5 @@ public class Main {
 							// NO
 								// "go to shop" meni
 
-	
-	 
 	}
 }
