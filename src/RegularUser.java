@@ -13,7 +13,7 @@ public class RegularUser extends User {
 	
 	// TODO
 	@Override
-	void finishShopping(double total, int currentNumberOfBankAccount) {
+	void finishShopping(double total, int currentNumberOfBankAccount, int shipping) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		
 		if(Validation.enoughMoney(currentNumberOfBankAccount, total))
@@ -26,7 +26,7 @@ public class RegularUser extends User {
 		}
 			
 		
-		shopMethods.giveAReceipt(total);
+		shopMethods.giveAReceipt(total, shipping);
 		System.out.println("Thank You!");
 		
 	}

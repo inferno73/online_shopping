@@ -12,8 +12,8 @@ public class Shirt extends Clothes{
 		numberOf++;
 	}
 	
-	Shirt(double price, String material, String size, String color, String sleeveLength, boolean hasButtons){
-		super(price, material, size, color);
+	Shirt(int id, double price, String material, String size, String color, String sleeveLength, boolean hasButtons){
+		super(id, price, material, size, color);
 		this.sleeveLength=sleeveLength;
 		this.hasButtons=hasButtons;
 		numberOf++;

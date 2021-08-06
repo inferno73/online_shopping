@@ -11,8 +11,8 @@ public class Sneakers extends Item{
 		numberOf++;
 	}
 	
-	Sneakers(double price, String material, String brand, boolean forSports){
-		super(price, material);
+	Sneakers(int id, double price, String material, String brand, boolean forSports){
+		super(id, price, material);
 		this.brand=brand;
 		this.forSports=forSports;
 		numberOf++;

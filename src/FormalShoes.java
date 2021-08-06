@@ -9,8 +9,8 @@ public class FormalShoes extends Item{
 		numberOf++;
 	}
 	
-	FormalShoes(double price, String material){
-		super(price, material);
+	FormalShoes(int id, double price, String material){
+		super(id, price, material);
 		numberOf++;
 	}
 

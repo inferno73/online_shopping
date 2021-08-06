@@ -13,8 +13,8 @@ public class Jewelry extends Item{
 		numberOf++;
 	}
 	
-	Jewelry(double price, String material, double grams){
-		super(price, material);
+	Jewelry(int id, double price, String material, double grams){
+		super(id, price, material);
 		this.grams=grams;
 		numberOf++;
 	}

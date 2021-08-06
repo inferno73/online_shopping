@@ -11,7 +11,7 @@ public class VIPUser extends User {
 	
 	
 	@Override
-	void finishShopping(double total, int currentNumberOfBankAccount) {
+	void finishShopping(double total, int currentNumberOfBankAccount, int shipping) {
 		ShopMethods shopMethods = ShopMethods.getInstance();
 		total = total * SHIPPING_DISCOUNT;
 		
@@ -23,7 +23,7 @@ public class VIPUser extends User {
 				}
 			}
 		}
-		shopMethods.giveAReceipt(total);
+		shopMethods.giveAReceipt(total, shipping);
 
 		System.out.println("Thank You!");
 	}

@@ -38,7 +38,7 @@ public abstract class User {
 		this.numberOfBankAccount = numberOfBankAccount;
 	}
 
-	abstract void finishShopping(double total, int currentNumberOfBankAccount); //as the way of calculating the final price is different for each type of users
+	abstract void finishShopping(double total, int currentNumberOfBankAccount, int shipping); //as the way of calculating the final price is different for each type of users
 	
 	public String getUsername() {
 		return username;

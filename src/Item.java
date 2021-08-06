@@ -1,6 +1,7 @@
 
 public class Item {
 	
+	private int id;
 	private double price;
 	private String material;
 	
@@ -8,7 +9,8 @@ public class Item {
 		
 	}
 	
-	Item(double price, String material){
+	Item(int id, double price, String material){
+		this.id = id;
 		this.price=price;
 		this.material=material;
 	}
@@ -32,6 +34,14 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [price=" + price + ", material=" + material + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

@@ -143,9 +143,12 @@ public class ShopMethods implements ShopInterface {
 			//as this user is just creating his/her account ---regularUser
 			RegularUser newUser = new RegularUser(username, password, accountNumber);
 			RegularUser.getList().add(newUser);
+			saveToFileUser();
+			
 			
 			BankAccount newBankAccount = new BankAccount (accountNumber, amount);
 			BankAccount.getList().add(newBankAccount);
+			saveToFileBankAccount();
 			
 		} catch(InputMismatchException e) {
             input.nextLine();
@@ -195,7 +198,7 @@ public class ShopMethods implements ShopInterface {
 					menuAdmin();
 	                break;
 	            case 4:
-	                menuShop(Admin.getInstance().getUsername()); 
+	                menuShop("Admin"); 
 	                break;
 	            case 5:
 	            	brr=1;
@@ -307,14 +310,9 @@ public class ShopMethods implements ShopInterface {
                 	System.out.println("Choose an item from the list by entering the correct number: ");
                 	itemNumber = input.nextInt();
                 	for(int i=0; i<Pants.list.size(); i++) {
-                		if(i==itemNumber) {
-                			double price = Pants.list.get(i).getPrice(); 
-                			for(int j=0; j<User.getList().size(); i++) {
-                				if(User.getList().get(j).getUsername().equals(username)) {
-                					cost += price;
-                					menuEndShopping(username, cost);
-                				}
-                			}
+                		if(Pants.list.get(i).getId()==itemNumber) {
+                			cost += Pants.list.get(i).getPrice(); 
+                			menuEndShopping(username, cost);
                 		}
                 	}
                     break;
@@ -323,15 +321,10 @@ public class ShopMethods implements ShopInterface {
                 	System.out.println("Choose an item from the list by entering the correct number: ");
                 	itemNumber = input.nextInt();
                 	for(int i=0; i<Shirt.list.size(); i++) {
-                		if(i==itemNumber) {
-                			double price = Shirt.list.get(i).getPrice(); 
-                			for(int j=0; j<User.getList().size(); i++) {
-                				if(User.getList().get(j).getUsername().equals(username)) {
-                					cost += price;
-                					menuEndShopping(username, cost);
-                				}
+                		if(Shirt.list.get(i).getId()==itemNumber) {
+                			cost += Shirt.list.get(i).getPrice(); 
+                			menuEndShopping(username, cost);
                 			}
-                		}
                 	}
                     break;
                 case 3:
@@ -339,14 +332,9 @@ public class ShopMethods implements ShopInterface {
                 	System.out.println("Choose an item from the list by entering the correct number: ");
                 	itemNumber = input.nextInt();
                 	for(int i=0; i<Sneakers.list.size(); i++) {
-                		if(i==itemNumber) {
-                			double price = Sneakers.list.get(i).getPrice(); 
-                			for(int j=0; j<User.getList().size(); i++) {
-                				if(User.getList().get(j).getUsername().equals(username)) {
-                					cost += price;
-                					menuEndShopping(username, cost);
-                				}
-                			}
+                		if(Sneakers.list.get(i).getId()==itemNumber) {
+                			cost += Sneakers.list.get(i).getPrice(); 
+                			menuEndShopping(username, cost);
                 		}
                 	}
                     break;
@@ -355,15 +343,10 @@ public class ShopMethods implements ShopInterface {
                 	System.out.println("Choose an item from the list by entering the correct number: ");
                 	itemNumber = input.nextInt();
                 	for(int i=0; i<FormalShoes.list.size(); i++) {
-                		if(i==itemNumber) {
-                			double price = FormalShoes.list.get(i).getPrice(); 
-                			for(int j=0; j<User.getList().size(); i++) {
-                				if(User.getList().get(j).getUsername().equals(username)) {
-                					cost += price;
-                					menuEndShopping(username, cost);
-                				}
+                		if(FormalShoes.list.get(i).getId()==itemNumber) {
+                			cost += FormalShoes.list.get(i).getPrice(); 
+                			menuEndShopping(username, cost);
                 			}
-                		}
                 	}
                     break;
                 case 5: 
@@ -372,14 +355,9 @@ public class ShopMethods implements ShopInterface {
                 	itemNumber = input.nextInt();
                 	
                 	for(int i=0; i<Jewelry.list.size(); i++) {
-                		if(i==itemNumber) {
-                			double price = Jewelry.list.get(i).getPrice(); 
-                			for(int j=0; j<User.getList().size(); i++) {
-                				if(User.getList().get(j).getUsername().equals(username)) {
-                					cost += price;
-                					menuEndShopping(username, cost);
-                				}
-                			}
+                		if(Jewelry.list.get(i).getId()==itemNumber) {
+                			cost += Jewelry.list.get(i).getPrice(); 
+                			menuEndShopping(username, cost);
                 		}
                 	}
                     break;
@@ -431,6 +409,9 @@ public class ShopMethods implements ShopInterface {
 	            	System.out.println("Add Pants" );
 	            	Pants pants = new Pants();
 					
+	            	System.out.println("ID: ");
+					pants.setId(input.nextInt());
+					
 	            	System.out.println("Color: ");
 					pants.setColor(input.next());
 					
@@ -473,6 +454,9 @@ public class ShopMethods implements ShopInterface {
 	            case 2:
 	            	System.out.println("Add Shirt" );
 	            	Shirt shirt = new Shirt();
+	            	
+	            	System.out.println("ID: ");
+					shirt.setId(input.nextInt());
 	            	
 	            	System.out.println("Color: ");
 					shirt.setColor(input.next());
@@ -517,6 +501,9 @@ public class ShopMethods implements ShopInterface {
 	            	System.out.println("Add Formal Shoes: ");
 	            	
 	            	FormalShoes formalshoes = new FormalShoes();
+	            	
+	            	System.out.println("ID: ");
+					formalshoes.setId(input.nextInt());
 					
 	            	System.out.println("Material: ");
 					formalshoes.setMaterial(input.next());
@@ -532,6 +519,9 @@ public class ShopMethods implements ShopInterface {
 	                System.out.println("Add Sneakers: ");
 	                
 	                Sneakers sneakers = new Sneakers();
+	                
+	                System.out.println("ID: ");
+					sneakers.setId(input.nextInt());
 	                
 	                System.out.println("Brand: ");
 					sneakers.setBrand(input.next());
@@ -570,6 +560,9 @@ public class ShopMethods implements ShopInterface {
 	            	System.out.println("Add Jewelry: ");
 	            	
 	            	Jewelry jewelry = new Jewelry();
+	            	
+	            	System.out.println("ID: ");
+					jewelry.setId(input.nextInt());
 	            	
 	            	System.out.println("Material: ");
 					jewelry.setMaterial(inputFile.next());
@@ -626,36 +619,60 @@ public class ShopMethods implements ShopInterface {
                
                switch(option) {
                case 1: 
-                   determineShippingInfo();
-                   
+            	   System.out.println("Choose your country: ");
+	           		System.out.println("1. Bosnia and Herzegovina");
+	           		System.out.println("2. Other");
+	           		int country = input.nextInt();
+	           		int shipping = 0;
+	           		
+	           		if(country == 1)
+	           			shipping = 5;
+	           		else if (country == 2)
+	           			shipping = 20;
+	           		else
+	           		{
+	           			System.out.println("Invalid input. Try again.");
+	           			menuEndShopping(username, cost);
+	           		}
+
                    while(true) {
+                	   
 	                   System.out.println("Enter Number of BankAccount: ");
 	                   int currentNumberOfBankAccount =  input.nextInt();
 	                   
                 	   if(Validation.validNumberOfBankAccount(username, currentNumberOfBankAccount))
                        {
                        	for(int i = 0; i < User.getList().size(); i++)
-                        {           		
-                           	if (User.getList().get(i).getUsername().equals("Admin")){
-                           		Admin.getInstance().finishShopping(cost, currentNumberOfBankAccount);
-                           	}
-                           	else if(User.getList().get(i).getUsername().equals(username)){
-                           		for(int j = 0; j < VIPUser.getVIPlist().size(); j++ ) {
-                           			if(VIPUser.getVIPlist().get(i).getUsername().equals(User.getList().get(i).getUsername())) {
-                           				vipUser.finishShopping(cost, currentNumberOfBankAccount);
-                           			}
+                        {  
+                           	if(User.getList().get(i).getUsername().equals(username)){
+                           		
+                           		if(username.equals("Admin"))
+                           		{
+                           			Admin.getInstance().finishShopping(cost, currentNumberOfBankAccount, shipping);
                            		}
-                           		regularUser.finishShopping(cost, currentNumberOfBankAccount);
+                           		else
+                           		{
+                           			for(int j = 0; j < VIPUser.getVIPlist().size(); j++ ) {
+	                           			if(VIPUser.getVIPlist().get(i).getUsername().equals(User.getList().get(i).getUsername())) {
+	                           				vipUser.finishShopping(cost, currentNumberOfBankAccount, shipping);
+	                           			}
+	                           		}
+	                           		regularUser.finishShopping(cost, currentNumberOfBankAccount, shipping);
+                           		}
+                           		
                            	}
                         }
                        	countPurchases(username);
                        	becomeVIPUser(username);
-                       	break;
+                       	
                        } else {
                     	   System.out.println("Invalid number of bank account. Please enter again: ");
                        }
+                	   break;
                    }
+                   
                    break;
+                   
                case 2:
                    brr=1;
                    menuShop(username);
@@ -752,6 +769,7 @@ public class ShopMethods implements ShopInterface {
 					newVIPUser.setRate(User.getList().get(i).getRate());
 					
 					VIPUser.getVIPlist().add(newVIPUser);
+					saveToFileVIPUser();
 				}
 			}
 		}
@@ -759,8 +777,6 @@ public class ShopMethods implements ShopInterface {
 
 	@Override
 	public int determineShippingInfo() {
-		//System.out.println("Enter your delivery address: ");
-		//String address = input.next();
 		
 		System.out.println("Choose your country: ");
 		System.out.println("1. Bosnia and Herzegovina");
@@ -773,14 +789,16 @@ public class ShopMethods implements ShopInterface {
 		return 20;
 	}
 	
+
+	
 		
 	@Override
-	public void giveAReceipt(double cost) {
+	public void giveAReceipt(double cost, int shipping) {
 		System.out.println("----------------------------------");
-		System.out.println("Shipping: " + determineShippingInfo());
+		System.out.println("Shipping: " + shipping);
 		System.out.println("Cost: "+ cost);
 		System.out.println();
-		System.out.println("TOTAL: " + calculateTotal(cost, determineShippingInfo()) + " $" );
+		System.out.println("TOTAL: " + calculateTotal(cost, shipping) + " $" );
 		System.out.println("----------------------------------");
 	}	
 	
@@ -826,6 +844,7 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Pants pants = new Pants();
+				pants.setId(inputFile.nextInt());
 				pants.setColor(inputFile.next());
 				pants.setHasBelt(Boolean.parseBoolean(inputFile.next()));
 				pants.setLength(inputFile.next());
@@ -847,6 +866,7 @@ public class ShopMethods implements ShopInterface {
             BufferedWriter writer = Files.newBufferedWriter(path);
 
             for(Pants pants : Pants.list) {
+            	writer.write(pants.getId() + " ");
                 writer.write(pants.getColor() + " ");
                 if(pants.doesHaveBelt())
                     writer.write("has ");
@@ -873,6 +893,7 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Shirt shirt = new Shirt();
+				shirt.setId(inputFile.nextInt());
 				shirt.setColor(inputFile.next());
 				shirt.setHasButtons(Boolean.parseBoolean(inputFile.next())); 
 				shirt.setSleeveLength(inputFile.next());
@@ -894,11 +915,12 @@ public class ShopMethods implements ShopInterface {
             BufferedWriter writer = Files.newBufferedWriter(path);
 
             for(Shirt shirt : Shirt.list) {
+            	writer.write(shirt.getId() + " ");
                 writer.write(shirt.getColor() + " ");
                 if(shirt.isHasButtons())
-                    writer.write("has");
+                    writer.write("has ");
                 else
-                    writer.write("hasn't");
+                    writer.write("hasn't ");
                 writer.write(shirt.getSleeveLength() + " ");
                 writer.write(shirt.getMaterial() + " ");
                 writer.write(shirt.getSize() + " ");
@@ -920,6 +942,7 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Jewelry jewelry = new Jewelry();
+				jewelry.setId(inputFile.nextInt());
 				jewelry.setMaterial(inputFile.next());
 				jewelry.setPrice(Double.parseDouble(inputFile.next()));
 				Jewelry.list.add(jewelry);
@@ -937,6 +960,7 @@ public class ShopMethods implements ShopInterface {
             BufferedWriter writer = Files.newBufferedWriter(path);
 
             for(Jewelry jewelry : Jewelry.list) {
+            	writer.write(jewelry.getId() + " ");
                 writer.write(jewelry.getMaterial() + " ");
                 writer.write(String.valueOf(jewelry.getPrice()) + " ");
                 writer.write("\n");
@@ -956,6 +980,7 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				Sneakers sneakers = new Sneakers();
+				sneakers.setId(inputFile.nextInt());
 				sneakers.setBrand(inputFile.next());
 				sneakers.setForSports(Boolean.parseBoolean(inputFile.next()));
 				sneakers.setMaterial(inputFile.next());
@@ -975,7 +1000,8 @@ public class ShopMethods implements ShopInterface {
             BufferedWriter writer = Files.newBufferedWriter(path);
 
             for(Sneakers sneakers : Sneakers.list) {
-                writer.write(sneakers.getBrand() + " ");
+            	writer.write(sneakers.getId() + " ");
+            	writer.write(sneakers.getBrand() + " ");
                 if(sneakers.isForSports())
                     writer.write("is");
                 else
@@ -1003,6 +1029,7 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				FormalShoes formalshoes = new FormalShoes();
+				formalshoes.setId(inputFile.nextInt());
 				formalshoes.setMaterial(inputFile.next());
 				formalshoes.setPrice(Double.parseDouble(inputFile.next()));
 				FormalShoes.list.add(formalshoes);
@@ -1020,6 +1047,7 @@ public class ShopMethods implements ShopInterface {
             BufferedWriter writer = Files.newBufferedWriter(path);
 
             for(FormalShoes formalshoes : FormalShoes.list) {
+            	writer.write(formalshoes.getId() + " ");
                 writer.write(formalshoes.getMaterial() + " ");
                 writer.write(String.valueOf(formalshoes.getPrice()) + " ");
                 writer.write("\n");

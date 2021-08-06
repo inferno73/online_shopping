@@ -11,8 +11,8 @@ public class Pants extends Clothes{
 		numberOf++;
 	}
 	
-	Pants(double price, String material, String size, String color, String length, boolean hasBelt){
-		super(price, material, size, color);
+	Pants(int id, double price, String material, String size, String color, String length, boolean hasBelt){
+		super(id, price, material, size, color);
 		this.length=length;
 		this.hasBelt=hasBelt;
 		numberOf++;

@@ -14,7 +14,7 @@ public interface ShopInterface {
 	public void menuEndShopping (String username, double cost);
 	
 	
-	public void giveAReceipt(double total); //gives a receipt based on writeToReceipt method 
+	public void giveAReceipt(double total, int shipping); //gives a receipt based on writeToReceipt method 
 	
 	public double calculateTotal(double cost, int shipping); //returns total price: adds new expense to previous expense
 	
