@@ -50,12 +50,5 @@ public class BankAccount {
 	public static void setList(ArrayList<BankAccount> list) {
 		BankAccount.list = list;
 	}
-	
-	@Override
-	public String toString() {
-		return "BankAccount [numberOfBankAccount=" + numberOfBankAccount + ", amount=" + amount + "]";
-	}
 
-
-	
 }

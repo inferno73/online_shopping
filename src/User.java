@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public abstract class User {
 
@@ -10,7 +9,7 @@ public abstract class User {
 	private boolean hasShipping; //free for admin and vip
 	private int numberOfPurchases;
 	private static ArrayList<User> list = new ArrayList<User>();
-	private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
+	//private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	
 
 	User() {
@@ -33,15 +32,6 @@ public abstract class User {
 	}
 
 	abstract void finishShopping(double total, int currentNumberOfBankAccount); //as the way of calculating the final price is different for each type of users
-	
-	//store credentials
-    public static void addCredentials(String username, String password) {
-        credentialsMap.put(username, password);
-    }
-    
-    public static HashMap<String, String> getCredentials () {
-    	return credentialsMap;
-    }
 	
 	public String getUsername() {
 		return username;

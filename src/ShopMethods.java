@@ -225,8 +225,9 @@ public class ShopMethods implements ShopInterface {
 			
 			System.out.println("Choose an option: ");
 			System.out.println("1. Go to Shop");
-			System.out.println("2. BankAccount Options");
-			System.out.println("3. Log Out");		
+			System.out.println("2. Check bank account balance ");
+			System.out.println("3. Add money on bank account: ");
+			System.out.println("4. Log Out");		
 
             try {
                 int option = input.nextInt();
@@ -240,13 +241,25 @@ public class ShopMethods implements ShopInterface {
             		for (int i = 0; i < User.getList().size(); i++){
             			if(User.getList().get(i).getUsername().equals(username)){
                 			for(int j = 0; j< BankAccount.getList().size(); j++){
-                				if(BankAccount.getList().get(j).getNumberOfBankAccount() == User.getList().get(i).getNumberOfBankAccount())
-                					System.out.println(BankAccount.getList().get(j).toString());                				
+                				if(BankAccount.getList().get(j).getNumberOfBankAccount() == User.getList().get(i).getNumberOfBankAccount())   
+                					System.out.println("Amount: " + BankAccount.getList().get(j).getAmount());
                 			}
             			}
             		}
-            		break;		
-                case 3:
+            		break;	
+                case 3:	
+                	for (int i = 0; i < User.getList().size(); i++){
+            			if(User.getList().get(i).getUsername().equals(username)){
+                			for(int j = 0; j< BankAccount.getList().size(); j++){
+                				if(BankAccount.getList().get(j).getNumberOfBankAccount() == User.getList().get(i).getNumberOfBankAccount()) {
+                					System.out.println("Enter amount of money: ");
+                					BankAccount.getList().get(j).setAmount(BankAccount.getList().get(j).getAmount() + input.nextDouble());
+                				}	
+                			}
+            			}
+            		}
+            		break;
+                case 4:
                 	brr=1;
                     break;
                 }

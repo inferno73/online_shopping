@@ -21,6 +21,7 @@ public class Admin extends User {
 	}
 	
 	public void removeAUser(String username) {
+		User.getList().remove(username);
 		User.getCredentials().remove(username);
 	}
 
