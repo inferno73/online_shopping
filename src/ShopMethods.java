@@ -63,6 +63,7 @@ public class ShopMethods implements ShopInterface {
             }
         }
         System.out.println("Application is closed successfully.");
+        saveAllToFile();
     }
 	
 
@@ -194,7 +195,7 @@ public class ShopMethods implements ShopInterface {
 					menuAdmin();
 	                break;
 	            case 4:
-	                menuShop(Admin.getInstance().getUsername()); //TODO je li uredu ovako?
+	                menuShop(Admin.getInstance().getUsername()); 
 	                break;
 	            case 5:
 	            	brr=1;
@@ -271,7 +272,7 @@ public class ShopMethods implements ShopInterface {
                 input.nextLine();
                 System.out.println("Invalid input. Try again.");
                 System.out.println();
-                menuWelcome();
+                menuUser(username);
             }
 
         }
@@ -400,7 +401,7 @@ public class ShopMethods implements ShopInterface {
                 input.nextLine();
                 System.out.println("Invalid input. Try again.");
                 System.out.println();
-                menuWelcome();
+                menuShop(username);
             }
         }
         System.out.println("Application is closed successfully.");
@@ -466,6 +467,7 @@ public class ShopMethods implements ShopInterface {
 					pants.setPrice(input.nextDouble());
 					
 					Pants.list.add(pants);
+					saveToFilePants();
 	            	break;
 	            	
 	            case 2:
@@ -508,6 +510,7 @@ public class ShopMethods implements ShopInterface {
 					shirt.setPrice(input.nextDouble());
 					
 					Shirt.list.add(shirt);
+					saveToFileShirt();
 	            	break;
 	            	
 	            case 3: 
@@ -522,6 +525,7 @@ public class ShopMethods implements ShopInterface {
 					formalshoes.setPrice(input.nextDouble());
 					
 					FormalShoes.list.add(formalshoes);
+					saveToFileFormalShoes();
 	                break;
 	                
 	            case 4:
@@ -559,10 +563,11 @@ public class ShopMethods implements ShopInterface {
 					sneakers.setPrice(input.nextDouble());
 					
 					Sneakers.list.add(sneakers);
+					saveToFileSneakers();
 	                break;
 	                
 	            case 5:
-	            	System.out.println("Add Jewerly: ");
+	            	System.out.println("Add Jewelry: ");
 	            	
 	            	Jewelry jewelry = new Jewelry();
 	            	
@@ -573,6 +578,7 @@ public class ShopMethods implements ShopInterface {
 					jewelry.setPrice(inputFile.nextDouble());
 					
 					Jewelry.list.add(jewelry);
+					saveToFileJewelry();
 	                break;
 	                
 	            case 6:
@@ -592,7 +598,7 @@ public class ShopMethods implements ShopInterface {
 	            input.nextLine();
 	            System.out.println("Invalid input. Try again.");
 	            System.out.println();
-	            menuAdmin();
+	            menuAddNewItem();
 	        }
 
 	    }
@@ -664,7 +670,7 @@ public class ShopMethods implements ShopInterface {
                input.nextLine();
                System.out.println("Invalid input. Try again.");
                System.out.println();
-               menuWelcome();
+               menuEndShopping(username, cost);
            }
 
        }
@@ -799,14 +805,9 @@ public class ShopMethods implements ShopInterface {
 		try {
 			inputFile = new Scanner (Paths.get(fileName)); 
 			
-			int br = 0;
 			while(inputFile.hasNext()) {
-				System.out.print(inputFile.next()+" ");
-				br++;
-				if(br%3==0) {
-					System.out.println();
-					br=0;
-				}
+				System.out.println(inputFile.next()+" ");
+					
 			}
 			
 			System.out.println();
@@ -826,11 +827,11 @@ public class ShopMethods implements ShopInterface {
 			while(inputFile.hasNext()) {	
 				Pants pants = new Pants();
 				pants.setColor(inputFile.next());
-				pants.setHasBelt(inputFile.nextBoolean()); 
+				pants.setHasBelt(Boolean.parseBoolean(inputFile.next()));
 				pants.setLength(inputFile.next());
 				pants.setMaterial(inputFile.next());
 				pants.setSize(inputFile.next());
-				pants.setPrice(inputFile.nextDouble());
+				pants.setPrice(Double.parseDouble(inputFile.next()));
 				Pants.list.add(pants);
 			}
 			
@@ -840,30 +841,30 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFilePants() {
-		try {
-			Path path = Paths.get("pants.txt");	
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			
-			for(Pants pants : Pants.list) {	
-				writer.write("color: " + pants.getColor() + " ");
-				if(pants.doesHaveBelt())
-					writer.write("has belt");
-				else
-					writer.write("doesn't have belt");
-				writer.write("length: " + pants.getLength() + " ");
-				writer.write("material: " + pants.getMaterial() + " ");
-				writer.write("size: " + pants.getSize() + " ");
-				writer.write("price: " + pants.getPrice() + " ");
-				writer.write("\n");
-			}
-			writer.close();
-			
-		} catch(IOException e) {
-			System.out.println("Input/output error.");
-			e.getMessage();
-		}
-	}
+    public void saveToFilePants() {
+        try {
+            Path path = Paths.get("pants.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path);
+
+            for(Pants pants : Pants.list) {
+                writer.write(pants.getColor() + " ");
+                if(pants.doesHaveBelt())
+                    writer.write("has");
+                else
+                    writer.write("hasn't");
+                writer.write(pants.getLength() + " ");
+                writer.write(pants.getMaterial() + " ");
+                writer.write(pants.getSize() + " ");
+                writer.write(String.valueOf(pants.getPrice()) + " ");
+                writer.write("\n");
+            }
+            writer.close();
+
+        } catch(IOException e) {
+            System.out.println("Input/output error.");
+            e.getMessage();
+        }
+    }
 
 	@Override
 	public void saveToListShirt() {
@@ -873,11 +874,11 @@ public class ShopMethods implements ShopInterface {
 			while(inputFile.hasNext()) {	
 				Shirt shirt = new Shirt();
 				shirt.setColor(inputFile.next());
-				shirt.setHasButtons(inputFile.nextBoolean()); 
+				shirt.setHasButtons(Boolean.parseBoolean(inputFile.next())); 
 				shirt.setSleeveLength(inputFile.next());
 				shirt.setMaterial(inputFile.next());
 				shirt.setSize(inputFile.next());
-				shirt.setPrice(inputFile.nextDouble());
+				shirt.setPrice(Double.parseDouble(inputFile.next()));
 				Shirt.list.add(shirt);
 			}
 			
@@ -887,30 +888,30 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFileShirt() {
-		try {
-			Path path = Paths.get("shirt.txt");	
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			
-			for(Shirt shirt : Shirt.list) {	
-				writer.write("color: " + shirt.getColor() + " ");
-				if(shirt.isHasButtons())
-					writer.write("has belt");
-				else
-					writer.write("doesn't have belt");
-				writer.write("length: " + shirt.getSleeveLength() + " ");
-				writer.write("material: " + shirt.getMaterial() + " ");
-				writer.write("size: " + shirt.getSize() + " ");
-				writer.write("price: " + shirt.getPrice() + " ");
-				writer.write("\n");
-			}
-			writer.close();
-			
-		} catch(IOException e) {
-			System.out.println("Input/output error.");
-			e.getMessage();
-		}		
-	}
+    public void saveToFileShirt() {
+        try {
+            Path path = Paths.get("shirt.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path);
+
+            for(Shirt shirt : Shirt.list) {
+                writer.write(shirt.getColor() + " ");
+                if(shirt.isHasButtons())
+                    writer.write("has");
+                else
+                    writer.write("hasn't");
+                writer.write(shirt.getSleeveLength() + " ");
+                writer.write(shirt.getMaterial() + " ");
+                writer.write(shirt.getSize() + " ");
+                writer.write(String.valueOf(shirt.getPrice()) + " ");
+                writer.write("\n");
+            }
+            writer.close();
+
+        } catch(IOException e) {
+            System.out.println("Input/output error.");
+            e.getMessage();
+        }
+    }
 
 	@Override
 	public void saveToListJewelry() {
@@ -920,7 +921,7 @@ public class ShopMethods implements ShopInterface {
 			while(inputFile.hasNext()) {	
 				Jewelry jewelry = new Jewelry();
 				jewelry.setMaterial(inputFile.next());
-				jewelry.setPrice(inputFile.nextDouble());
+				jewelry.setPrice(Double.parseDouble(inputFile.next()));
 				Jewelry.list.add(jewelry);
 			}
 			
@@ -930,23 +931,23 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFileJewelry() {
-		try {
-			Path path = Paths.get("jewelry.txt");	
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			
-			for(Jewelry jewelry : Jewelry.list) {	
-				writer.write("material: " + jewelry.getMaterial() + " ");
-				writer.write("price: " + jewelry.getPrice() + " ");
-				writer.write("\n");
-			}
-			writer.close();
-			
-		} catch(IOException e) {
-			System.out.println("Input/output error.");
-			e.getMessage();
-		}
-	}
+    public void saveToFileJewelry() {
+        try {
+            Path path = Paths.get("jewelry.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path);
+
+            for(Jewelry jewelry : Jewelry.list) {
+                writer.write(jewelry.getMaterial() + " ");
+                writer.write(String.valueOf(jewelry.getPrice()) + " ");
+                writer.write("\n");
+            }
+            writer.close();
+
+        } catch(IOException e) {
+            System.out.println("Input/output error.");
+            e.getMessage();
+        }
+    }
 
 	@Override
 	public void saveToListSneakers() {
@@ -956,9 +957,9 @@ public class ShopMethods implements ShopInterface {
 			while(inputFile.hasNext()) {	
 				Sneakers sneakers = new Sneakers();
 				sneakers.setBrand(inputFile.next());
-				sneakers.setForSports(inputFile.nextBoolean());
+				sneakers.setForSports(Boolean.parseBoolean(inputFile.next()));
 				sneakers.setMaterial(inputFile.next());
-				sneakers.setPrice(inputFile.nextDouble());
+				sneakers.setPrice(Double.parseDouble(inputFile.next()));
 				Sneakers.list.add(sneakers);
 			}
 			
@@ -968,32 +969,32 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFileSneakers() {
-		try {
-			Path path = Paths.get("sneakers.txt");	
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			
-			for(Sneakers sneakers : Sneakers.list) {	
-				writer.write("brand: " + sneakers.getBrand() + " ");
-				if(sneakers.isForSports())
-					writer.write("is for sports");
-				else
-					writer.write("isn't for sports");
-				writer.write("material: " + sneakers.getMaterial() + " ");
-				writer.write("price: " + sneakers.getPrice() + " ");
-				writer.write("\n");
-			}
-			writer.close();
-			
-		} catch(IOException e) {
+    public void saveToFileSneakers() {
+        try {
+            Path path = Paths.get("sneakers.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path);
 
-			System.out.println("Input/output error.");
-			e.getMessage();
+            for(Sneakers sneakers : Sneakers.list) {
+                writer.write(sneakers.getBrand() + " ");
+                if(sneakers.isForSports())
+                    writer.write("is");
+                else
+                    writer.write("isn't");
+                writer.write(sneakers.getMaterial() + " ");
+                writer.write(String.valueOf(sneakers.getPrice()) + " ");
+                writer.write("\n");
+            }
+            writer.close();
 
-			System.out.println("IOException occurred. StackTrace: ");
-			e.printStackTrace();
-		}
-	}
+        } catch(IOException e) {
+
+            System.out.println("Input/output error.");
+            e.getMessage();
+
+            System.out.println("IOException occurred. StackTrace: ");
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public void saveToListFormalShoes() {
@@ -1003,7 +1004,7 @@ public class ShopMethods implements ShopInterface {
 			while(inputFile.hasNext()) {	
 				FormalShoes formalshoes = new FormalShoes();
 				formalshoes.setMaterial(inputFile.next());
-				formalshoes.setPrice(inputFile.nextDouble());
+				formalshoes.setPrice(Double.parseDouble(inputFile.next()));
 				FormalShoes.list.add(formalshoes);
 			}
 			
@@ -1013,23 +1014,23 @@ public class ShopMethods implements ShopInterface {
 	}
 
 	@Override
-	public void saveToFileFormalShoes() {
-		try {
-			Path path = Paths.get("formal_shoes.txt");	
-			BufferedWriter writer = Files.newBufferedWriter(path);
-			
-			for(FormalShoes formalshoes : FormalShoes.list) {	
-				writer.write("material: " + formalshoes.getMaterial() + " ");
-				writer.write("price: " + formalshoes.getPrice() + " ");
-				writer.write("\n");
-			}
-			writer.close();
-			
-		} catch(IOException e) {
-			System.out.println("Input/output error.");
-			e.getMessage();
-		}
-	}
+    public void saveToFileFormalShoes() {
+        try {
+            Path path = Paths.get("formal_shoes.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path);
+
+            for(FormalShoes formalshoes : FormalShoes.list) {
+                writer.write(formalshoes.getMaterial() + " ");
+                writer.write(String.valueOf(formalshoes.getPrice()) + " ");
+                writer.write("\n");
+            }
+            writer.close();
+
+        } catch(IOException e) {
+            System.out.println("Input/output error.");
+            e.getMessage();
+        }
+    }
 
 	@Override
 	public void saveToListUser() {
@@ -1038,16 +1039,15 @@ public class ShopMethods implements ShopInterface {
 		
 			while(inputFile.hasNext()) {	
 				User user = new RegularUser();
-				User user1 = new User() {
-					
-					@Override
-					void finishShopping(double total, int currentNumberOfBankAccount) {
-						// TODO Auto-generated method stub
-						
-					}
-				};
-				user1.setUsername(inputFile.next());
-				user1.setPassword(inputFile.next());
+				
+				user.setUsername(inputFile.next());
+				user.setPassword(inputFile.next());
+				user.setNumberOfBankAccount(inputFile.nextInt());
+				user.setRate(inputFile.nextInt());
+				user.setHasShipping(Boolean.parseBoolean(inputFile.next()));
+				user.setNumberOfPurchases(inputFile.nextInt());
+				
+				
 				User.getList().add(user);
 			}
 			
@@ -1063,8 +1063,8 @@ public class ShopMethods implements ShopInterface {
 			BufferedWriter writer = Files.newBufferedWriter(path);
 			
 			for(User user : User.getList()) {	
-				writer.write("username: " + user.getUsername() + " ");
-				writer.write("password: " + user.getPassword() + " ");
+				writer.write(user.getUsername() + " " + user.getPassword() + " " + user.getNumberOfBankAccount() + " " 
+				+  user.getRate() + " " + user.getHasShipping() + " " + user.getNumberOfPurchases()   );
 				writer.write("\n");
 			}
 			writer.close();
@@ -1084,6 +1084,10 @@ public class ShopMethods implements ShopInterface {
 				VIPUser vipUser = new VIPUser();
 				vipUser.setUsername(inputFile.next());
 				vipUser.setPassword(inputFile.next());
+				vipUser.setNumberOfBankAccount(inputFile.nextInt());
+				vipUser.setHasShipping(Boolean.parseBoolean(inputFile.next()));
+				vipUser.setRate(inputFile.nextInt());
+				
 				User.getList().add(vipUser);
 			}
 			
@@ -1099,8 +1103,8 @@ public class ShopMethods implements ShopInterface {
 			BufferedWriter writer = Files.newBufferedWriter(path);
 			
 			for(VIPUser vipUser : VIPUser.getVIPlist()) {	
-				writer.write("username: " + vipUser.getUsername() + " ");
-				writer.write("password: " + vipUser.getPassword() + " ");
+				writer.write(vipUser.getUsername() + " " + vipUser.getPassword() + " " + vipUser.getNumberOfBankAccount() + " " 
+						+ vipUser.getHasShipping() + " " + vipUser.getRate());
 				writer.write("\n");
 			}
 			writer.close();
@@ -1112,6 +1116,44 @@ public class ShopMethods implements ShopInterface {
 	}
 	
 	@Override
+	public void saveToListBankAccount() {
+		try {
+			inputFile = new Scanner (Paths.get("bank_account.txt"));	
+		
+			while(inputFile.hasNext()) {	
+				BankAccount bankAccount = new BankAccount();
+				
+				bankAccount.setNumberOfBankAccount(inputFile.nextInt());
+				bankAccount.setAmount(Double.parseDouble(inputFile.next()));
+				
+				BankAccount.getList().add(bankAccount);
+			}
+			
+		} catch(IOException e) {
+			System.out.println("File error.");
+		}
+		
+	}
+
+	@Override
+	public void saveToFileBankAccount() {
+		try {
+			Path path = Paths.get("bank_account.txt");	
+			BufferedWriter writer = Files.newBufferedWriter(path);
+			
+			for(BankAccount bankAccount : BankAccount.getList()) {	
+				writer.write(bankAccount.getNumberOfBankAccount() + " " + bankAccount.getAmount());
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch(IOException e) {
+			System.out.println("Input/output error.");
+			e.getMessage();
+		}
+	}
+
+	@Override
 	public void saveAllToFile() {
 		saveToFilePants();
 		saveToFileShirt();
@@ -1120,6 +1162,7 @@ public class ShopMethods implements ShopInterface {
 		saveToFileFormalShoes();
 		saveToFileUser();
 		saveToFileVIPUser();
+		saveToFileBankAccount();
 	}
 	
 	@Override
@@ -1131,6 +1174,8 @@ public class ShopMethods implements ShopInterface {
 		saveToListFormalShoes();
 		saveToListUser();
 		saveToListVIPUser();
+		saveToListBankAccount();
 	}
 
+	
 }

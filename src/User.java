@@ -9,11 +9,18 @@ public abstract class User {
 	private boolean hasShipping; //free for admin and vip
 	private int numberOfPurchases;
 	private static ArrayList<User> list = new ArrayList<User>();
-	//private static HashMap<String, String> credentialsMap = new HashMap<String,String>(); //Credentials - including username, password
 	
-
 	User() {
 		
+	}
+	
+	User (String username, String password, int numberOfBankAccount, int rate, boolean hasShipping, int numberOfPurchases){
+		this.username = username;
+		this.password = password;
+		this.numberOfBankAccount = numberOfBankAccount;
+		this.rate = rate;
+		this.hasShipping = hasShipping;
+		this.numberOfPurchases = numberOfPurchases;
 	}
 	
 	User(boolean hasShipping) {

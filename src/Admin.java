@@ -21,8 +21,12 @@ public class Admin extends User {
 	}
 	
 	public void removeAUser(String username) {
-		User.getList().remove(username);
-		User.getCredentials().remove(username);
+		for(int i = 9; i < User.getList().size(); i++)
+		{
+			if(User.getList().get(i).getUsername().equals(username)) {
+				User.getList().remove(User.getList().get(i));
+			}
+		}
 	}
 
 	@Override

@@ -13,6 +13,7 @@ public class Main {
 		method.createFile("formal_shoes.txt");
 		method.createFile("user.txt");
 		method.createFile("vip_user.txt");
+		method.createFile("bank_account.txt");
 		method.saveAllToList();
 		
 		System.out.println("Welcome to our online shop! ");

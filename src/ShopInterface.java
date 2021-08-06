@@ -53,6 +53,9 @@ public interface ShopInterface {
 	public void saveToListVIPUser();	
 	public void saveToFileVIPUser();
 	
+	public void saveToListBankAccount();	
+	public void saveToFileBankAccount();
+	
 	public void saveAllToFile();
 	public void saveAllToList();
 	
