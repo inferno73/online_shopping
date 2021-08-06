@@ -17,8 +17,6 @@ public interface ShopInterface {
 	
 	public double calculateTotal(double cost, int shipping); //returns total price: adds new expense to previous expense
 	
-	public int determineShippingInfo();
-	
 	public void becomeVIPUser(String username);
 	
 	public void countPurchases(String username); // counts purchases for discounts

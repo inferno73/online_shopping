@@ -711,22 +711,6 @@ public class ShopMethods implements ShopInterface {
 		}
 	}
 
-	@Override
-	public int determineShippingInfo() {
-		
-		System.out.println("Choose your country: ");
-		System.out.println("1. Bosnia and Herzegovina");
-		System.out.println("2. Other");
-		int option = input.nextInt();
-		
-		if(option == 1)
-			return 5;
-
-		return 20;
-	}
-	
-
-	
 		
 	@Override
 	public void giveAReceipt(double cost, int shipping) {
