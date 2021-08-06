@@ -849,9 +849,9 @@ public class ShopMethods implements ShopInterface {
             for(Pants pants : Pants.list) {
                 writer.write(pants.getColor() + " ");
                 if(pants.doesHaveBelt())
-                    writer.write("has");
+                    writer.write("has ");
                 else
-                    writer.write("hasn't");
+                    writer.write("hasn't ");
                 writer.write(pants.getLength() + " ");
                 writer.write(pants.getMaterial() + " ");
                 writer.write(pants.getSize() + " ");
