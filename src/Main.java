@@ -22,45 +22,6 @@ public class Main {
 		method.menuWelcome();
 
 		method.saveAllToFile();
-		//SignUp
-		//LogIn
-			//Admin meni 
-			//user meni
-				// shop meni
-						// Pants (file)
-							// add cost
 		
-						// Shirts (file)
-							// add cost
-
-						// Sneakers (file)
-							// add cost
-				
-						// FormalShoes (file)
-							// add cost
-					
-						// Jewelry (file)
-							// add cost
-					
-						// End Shopping?
-							// YES
-								// discount?
-									// input adress
-									// input country
-									// output shipping
-										/* name:
-										 * artik:
-										 * ....................
-										 * COST:
-										 */
-									// do you want to make a purchase?
-										// YES
-											// report
-											// Tank You...
-										// NO
-											// artikli
-							// NO
-								// "go to shop" meni
-
 	}
 }

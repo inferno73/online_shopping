@@ -1,3 +1,2 @@
 Admin OnlineAdmin73$ 1 true 0
 User1 user1 2 true 0
-User2 user2 3 true 0
